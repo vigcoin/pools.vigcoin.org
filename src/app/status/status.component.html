@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-md-4 stats">
+    <h3>全网</h3>
+    <div><i class="fa fa-tachometer"></i> 算力: <span id="networkHashrate"></span></div>
+    <div><i class="fa fa-clock-o"></i> 最后块: <span id="networkLastBlockFound"></span></div>
+    <div><i class="fa fa-unlock-alt"></i> 难度: <span id="networkDifficulty"></span></div>
+    <div><i class="fa fa-bars"></i> 块高度: <span id="blockchainHeight"></span></div>
+    <div><i class="fa fa-money"></i> 最新奖励: <span id="networkLastReward"></span></div>
+    <div><i class="fa fa-paw"></i> 最新哈希: <a id="lastHash" target="_blank"></a></div>
+  </div>
+
+  <div class="col-md-4 stats">
+    <h3>当前矿池</h3>
+    <div><i class="fa fa-tachometer"></i> 算力: <span id="poolHashrate"></span></div>
+    <div><i class="fa fa-clock-o"></i> 最后块: <span id="poolLastBlockFound"></span></div>
+    <div><i class="fa fa-users"></i> 在线矿工: <span id="poolMiners"></span></div>
+    <div id="donations"><i class="fa fa-gift"></i> 捐赠: <span id="poolDonations"></span></div>
+    <div><i class="fa fa-money"></i> 全部矿池费用: <span id="poolFee"></span></div>
+    <div><i class="fa fa-history"></i> 每个找到的块: <span id="blockSolvedTime"></span> (est.)</div>
+  </div>
+
+  <div class="col-md-4 stats marketRate">
+    <h3 id="marketHeader">市场</h3>
+    <div class="marketFooter">更新: <span id="marketLastUpdated"></span></div>
+    <div class="marketFooter">Powered by <a href="https://www.cryptonator.com/">Cryptonator</a></div>
+  </div>
+</div>
+
+<!-- <hr> -->
+
+<div class="row chartsPoolStat">
+  <div class="col-sm-2 chartWrap">
+    <h4>哈希/美元 <span data-toggle="tooltip" data-placement="top" data-original-title="奖励 * 比率 / 难度"><i class="fa fa-question-circle"></i></span></h4>
+    <div id="chartHashUsd" data-chart="profit">
+      <div class="chart"></div>
+      <!-- <p class="text-center" id="cur_profit">-</p> -->
+    </div>
+  </div>
+  <div class="col-sm-20 chartWrap">
+    <h4>美元价格</h4>
+    <div id="chartPriceUsd" data-chart="price">
+      <div class="chart"></div>
+      <!-- <p class="text-center" id="cur_price">-</p> -->
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4">
+    <h4 class="text-center">难度</h4>
+    <div id="chartDifficulty" data-chart="diff">
+      <div class="chart"></div>
+      <!-- <p class="text-center" id="cur_diff">-</p> -->
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <h4 class="text-center">算力</h4>
+    <div id="chartHashrate" data-chart="hashrate">
+      <div class="chart"></div>
+      <!-- <p class="text-center" id="cur_hashrate">-</p> -->
+    </div>
+  </div>
+  <div class="col-sm-4 chartWrap">
+    <h4 class="text-center">矿工</h4>
+    <div id="chartWorkers" data-chart="workers">
+      <div class="chart"></div>
+    </div>
+  </div>
+</div>

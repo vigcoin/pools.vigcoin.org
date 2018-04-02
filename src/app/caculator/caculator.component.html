@@ -1,0 +1,20 @@
+  <div id="miningProfitCalc">
+    <h3>挖矿利润估算</h3>
+    <div id="calcHashHolder">
+      <div class="input-group">
+        <input type="number" class="form-control" id="calcHashRate" placeholder="你的算力">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="calcHashDropdown">
+                    <span id="calcHashUnit" data-mul="1">KH/s</span> <span class="caret"></span>
+                </button>
+          <ul class="dropdown-menu dropdown-menu-right" role="menu" id="calcHashUnits">
+            <li><a href="#" data-mul="0">H/s</a></li>
+            <li><a href="#" data-mul="1">KH/s</a></li>
+            <li><a href="#" data-mul="2">MH/s</a></li>
+          </ul>
+        </div>
+        <span class="input-group-addon">=</span>
+        <span class="input-group-addon" id="calcHashResultsHolder"><span id="calcHashAmount"></span> <span id="calcHashSymbol"></span>/天</span>
+      </div>
+    </div>
+  </div>
