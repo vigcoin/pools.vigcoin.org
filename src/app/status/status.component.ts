@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-status',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatusComponent implements OnInit {
 
-  constructor() { }
+  @Input('status') data : {};
+  constructor() {
+
+   }
 
   ngOnInit() {
+    console.log("inside status");
+    console.log(this.data);
   }
 
 }
