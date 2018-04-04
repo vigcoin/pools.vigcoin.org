@@ -30,6 +30,6 @@ import { FooterComponent } from './footer/footer.component';
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [DataService],
-  bootstrap: [AppComponent, NavigatorComponent]
+  bootstrap: [AppComponent, NavigatorComponent, FooterComponent]
 })
 export class AppModule { }

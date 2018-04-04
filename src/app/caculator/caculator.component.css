@@ -1,0 +1,23 @@
+    #calcHashDropdown{
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+    }
+    #calcHashHolder{
+        width: 590px;
+        max-width: 100%;
+    }
+    #calcHashRate{
+        z-index: inherit;
+        font-family: 'Inconsolata', monospace;
+    }
+    #calcHashAmount{
+        font-family: 'Inconsolata', monospace;
+    }
+    #calcHashResultsHolder{
+        min-width: 145px;
+        max-width: 145px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }

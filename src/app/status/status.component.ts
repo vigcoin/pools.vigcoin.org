@@ -24,7 +24,7 @@ export class StatusComponent implements OnInit {
     console.log("inside status change");
     console.log(this.data);
 
-    if (Object.keys(this.data).length > 0) {
+    if (this.data && Object.keys(this.data).length > 0) {
       this.createCharts(this.data);
     }
 
