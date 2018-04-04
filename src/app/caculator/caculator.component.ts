@@ -11,10 +11,17 @@ export class CaculatorComponent implements OnInit {
   text = 'KH'
   unit = 1
   hashrate
+  symbol = 'VIG'
   constructor() { }
 
   ngOnInit() {
   }
+
+    ngOnChanges() {
+      if(this.data) {
+        this.symbol = this.data.config.symbol
+      }
+    }
 
   changeUnits(text, unit) {
     this.text = text;
