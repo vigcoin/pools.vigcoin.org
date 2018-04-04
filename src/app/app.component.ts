@@ -3,6 +3,8 @@ import { Title, Meta } from '@angular/platform-browser';
 
 import { DataService } from './data.service';
 
+import { Observable } from 'rxjs/Rx';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,7 +19,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.get('http://vig-pool.tyk.im:8119/stats').subscribe(data => {
+    this.dataService.get(this.dataService.config.api + '/stats').subscribe(data => {
       if (Object.keys(data).length > 0) {
         this.status = data;
         this.status.network.hashrate = this.status.network.difficulty / this.status.config.coinDifficultyTarget;
@@ -30,6 +32,24 @@ export class AppComponent implements OnInit {
         this.status.pool.lastBlockTime = this.timeAgo(this.status.pool.lastBlockFound / 1000);
         this.status.pool.blockTime = this.getReadableTime(this.status.network.difficulty / this.status.pool.hashrate);
       }
+    });
+
+    Observable.interval(this.dataService.config.interval || 10000).subscribe((v) => {
+      console.log("v = " + v);
+      this.dataService.get(this.dataService.config.api + '/live_stats').subscribe(data => {
+        if (Object.keys(data).length > 0) {
+          this.status = data;
+          this.status.network.hashrate = this.status.network.difficulty / this.status.config.coinDifficultyTarget;
+          this.status.network.hashrateReadable = this.hashRateWithUnit(this.status.network.difficulty / this.status.config.coinDifficultyTarget);
+          this.status.network.lastBlockTime = this.timeAgo(this.status.network.timestamp);
+          this.status.network.lastReward = this.getReadableCoins(this.status.network.reward, 4);
+          this.status.network.lastHashExplorerUrl = this.hashToUrl(this.status.network.hash);
+          this.status.pool.hashrateReadable = this.hashRateWithUnit(this.status.pool.hashrate);
+          this.status.pool.lastBlockTime = this.timeAgo(this.status.pool.lastBlockFound / 1000);
+          this.status.pool.lastBlockTime = this.timeAgo(this.status.pool.lastBlockFound / 1000);
+          this.status.pool.blockTime = this.getReadableTime(this.status.network.difficulty / this.status.pool.hashrate);
+        }
+      });
     });
   }
   getReadableTime(seconds) {

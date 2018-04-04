@@ -7,7 +7,7 @@ import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class DataService {
-  config = {
+  config: any = {
     api: "http://vig-pool.tyk.im:8119",
 
     api_blockexplorer: "http://vig-pool.tyk.im:19810",
