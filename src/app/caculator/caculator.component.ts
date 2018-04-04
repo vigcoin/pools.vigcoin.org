@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-declare var jquery: any;
-declare var $: any;
 
 @Component({
   selector: 'app-caculator',
@@ -9,33 +7,29 @@ declare var $: any;
 })
 export class CaculatorComponent implements OnInit {
   @Input('status') data;
-  amount
+  amount = '0'
+  text = 'KH'
+  unit = 1
+  hashrate
   constructor() { }
 
   ngOnInit() {
   }
 
-  //   $('#calcHashRate').keyup(calcEstimateProfit).change(calcEstimateProfit);
-
-  // $('#calcHashUnits > li > a').click(function(e){
-  //     e.preventDefault();
-  //     $('#calcHashUnit').text($(this).text()).data('mul', $(this).data('mul'));
-  //     calcEstimateProfit();
-  // });
-
   changeUnits(text, unit) {
-    $('#calcHashUnit').text(text).data('mul', unit);
+    this.text = text;
+    this.unit = unit;
     this.calcEstimateProfit();
   }
 
   calcEstimateProfit() {
     console.log("profit");
     try {
-      var rateUnit = Math.pow(1024, parseInt($('#calcHashUnit').data('mul')));
+      var rateUnit = Math.pow(1024, this.unit);
       console.log("profit 1");
       console.log(rateUnit);
 
-      var hashRate = parseFloat($('#calcHashRate').val()) * rateUnit;
+      var hashRate = parseFloat(this.hashrate) * rateUnit;
       console.log("profit 3");
       console.log(hashRate);
 
@@ -49,7 +43,7 @@ export class CaculatorComponent implements OnInit {
     catch (e) {
       console.log(e);
     }
-    this.amount = "";
+    this.amount = '0';
   }
 
   getReadableCoins(coins, digits, withoutSymbol = null) {
