@@ -6,7 +6,7 @@
     <div><i class="fa fa-unlock-alt"></i> 难度: <span id="networkDifficulty">{{data.network.difficulty}}</span></div>
     <div><i class="fa fa-bars"></i> 块高度: <span id="blockchainHeight">{{data.network.height}}</span></div>
     <div><i class="fa fa-money"></i> 最新奖励: <span id="networkLastReward">{{data.network.lastReward}}</span></div>
-    <div><i class="fa fa-paw"></i> 最新哈希: <a id="lastHash" target="_blank">{{data.network.hashrate}}</a></div>
+    <div><i class="fa fa-paw"></i> 最新哈希: <a id="lastHash" target="_blank" href="{{data.network.lastHashExplorerUrl}}">{{data.network.hash}}</a></div>
   </div>
 
   <div class="col-md-4 stats">
@@ -16,7 +16,7 @@
     <div><i class="fa fa-users"></i> 在线矿工: <span id="poolMiners">{{data.pool.miners}}</span></div>
     <!-- <div id="donations"><i class="fa fa-gift"></i> 捐赠: <span id="poolDonations"></span></div> -->
     <div><i class="fa fa-money"></i> 全部矿池费用: <span id="poolFee">{{data.config.fee}}%</span></div>
-    <div><i class="fa fa-history"></i> 每个找到的块: <span id="blockSolvedTime"></span> (est.)</div>
+    <div><i class="fa fa-history"></i> 每个找到的块: <span id="blockSolvedTime">{{data.pool.blockTime}}</span> (估计时间)</div>
   </div>
 
   <div class="col-md-4 stats marketRate">

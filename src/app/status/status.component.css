@@ -1,0 +1,7 @@
+#lastHash {
+    display: inline-block;
+    width: 230px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 0.8em;
+}

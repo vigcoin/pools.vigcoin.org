@@ -23,12 +23,36 @@ export class AppComponent implements OnInit {
       this.status.network.hashrateReadable = this.hashRateWithUnit(this.status.network.difficulty / this.status.config.coinDifficultyTarget);
       this.status.network.lastBlockTime = this.timeAgo(this.status.network.timestamp);
       this.status.network.lastReward = this.getReadableCoins(this.status.network.reward, 4);
+      this.status.network.lastHashExplorerUrl = this.hashToUrl(this.status.network.hash);
       this.status.pool.hashrateReadable = this.hashRateWithUnit(this.status.pool.hashrate);
       this.status.pool.lastBlockTime = this.timeAgo(this.status.pool.lastBlockFound / 1000);
       this.status.pool.lastBlockTime = this.timeAgo(this.status.pool.lastBlockFound / 1000);
-
-
+      this.status.pool.blockTime = this.getReadableTime(this.status.network.difficulty / this.status.pool.hashrate);
     });
+  }
+  getReadableTime(seconds) {
+
+    let units: any = [[60, '秒'], [60, '分钟'], [24, '小时'],
+    [7, '天'], [4, '周'], [12, '月'], [1, '年']];
+
+    function formatAmounts(amount, unit) {
+      var rounded = Math.round(amount);
+      return '' + rounded + ' ' + unit;
+    }
+    let amount = seconds;
+    let i = 0;
+    for (; i < units.length; i++) {
+      if (amount < units[i][0])
+        return formatAmounts(amount, units[i][1]);
+      amount = amount / units[i][0];
+    }
+    return formatAmounts(amount, units[i - 1][1]);
+  }
+
+  hashToUrl(id) {
+    console.log(this.dataService.config.blockchainExplorer);
+    let explorer = this.dataService.config.blockchainExplorer;
+    return explorer.replace('{symbol}', this.status.config.symbol.toLowerCase()).replace('{id}', id);
   }
 
   getReadableCoins(coins, digits, withoutSymbol = null) {
