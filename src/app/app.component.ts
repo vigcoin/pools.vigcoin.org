@@ -18,16 +18,18 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.get('http://vig-pool.tyk.im:8119/stats').subscribe(data => {
-      this.status = data;
-      this.status.network.hashrate = this.status.network.difficulty / this.status.config.coinDifficultyTarget;
-      this.status.network.hashrateReadable = this.hashRateWithUnit(this.status.network.difficulty / this.status.config.coinDifficultyTarget);
-      this.status.network.lastBlockTime = this.timeAgo(this.status.network.timestamp);
-      this.status.network.lastReward = this.getReadableCoins(this.status.network.reward, 4);
-      this.status.network.lastHashExplorerUrl = this.hashToUrl(this.status.network.hash);
-      this.status.pool.hashrateReadable = this.hashRateWithUnit(this.status.pool.hashrate);
-      this.status.pool.lastBlockTime = this.timeAgo(this.status.pool.lastBlockFound / 1000);
-      this.status.pool.lastBlockTime = this.timeAgo(this.status.pool.lastBlockFound / 1000);
-      this.status.pool.blockTime = this.getReadableTime(this.status.network.difficulty / this.status.pool.hashrate);
+      if (Object.keys(data).length > 0) {
+        this.status = data;
+        this.status.network.hashrate = this.status.network.difficulty / this.status.config.coinDifficultyTarget;
+        this.status.network.hashrateReadable = this.hashRateWithUnit(this.status.network.difficulty / this.status.config.coinDifficultyTarget);
+        this.status.network.lastBlockTime = this.timeAgo(this.status.network.timestamp);
+        this.status.network.lastReward = this.getReadableCoins(this.status.network.reward, 4);
+        this.status.network.lastHashExplorerUrl = this.hashToUrl(this.status.network.hash);
+        this.status.pool.hashrateReadable = this.hashRateWithUnit(this.status.pool.hashrate);
+        this.status.pool.lastBlockTime = this.timeAgo(this.status.pool.lastBlockFound / 1000);
+        this.status.pool.lastBlockTime = this.timeAgo(this.status.pool.lastBlockFound / 1000);
+        this.status.pool.blockTime = this.getReadableTime(this.status.network.difficulty / this.status.pool.hashrate);
+      }
     });
   }
   getReadableTime(seconds) {
