@@ -11,6 +11,7 @@ import { CaculatorComponent } from './caculator/caculator.component';
 import { NavigatorComponent } from './navigator/navigator.component';
 import { StatusComponent } from './status/status.component';
 import { FooterComponent } from './footer/footer.component';
+import { UserComponent, DocCookies } from './user/user.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FooterComponent } from './footer/footer.component';
     CaculatorComponent,
     NavigatorComponent,
     StatusComponent,
-    FooterComponent
+    FooterComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,7 @@ import { FooterComponent } from './footer/footer.component';
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [DataService],
+  providers: [DataService, DocCookies],
   bootstrap: [AppComponent, NavigatorComponent, FooterComponent]
 })
 export class AppModule { }

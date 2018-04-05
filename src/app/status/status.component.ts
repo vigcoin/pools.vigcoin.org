@@ -23,11 +23,9 @@ export class StatusComponent implements OnInit {
   ngOnChanges() {
     console.log("inside status change");
     console.log(this.data);
-
     if (this.data && Object.keys(this.data).length > 0) {
       this.createCharts(this.data);
     }
-
   }
 
   getGraphData(rawData, fixValueToCoins = undefined) {
@@ -41,8 +39,6 @@ export class StatusComponent implements OnInit {
         graphData.values.push(fixValueToCoins ? this.getReadableCoins(xy[1], 4, true) : xy[1]);
       }
     }
-
-
     return graphData;
   }
 
@@ -50,6 +46,7 @@ export class StatusComponent implements OnInit {
     var amount = (parseInt(coins || 0) / this.data.config.coinUnits).toFixed(digits || this.data.config.coinUnits.toString().length - 1);
     return amount + (withoutSymbol ? '' : (' ' + this.data.config.symbol));
   }
+  
   createCharts(data) {
     let currencyGraphStat = {
       type: 'line',

@@ -33,5 +33,6 @@ export class NavigatorComponent implements OnInit {
 
     }
   }
+  
 
 }
