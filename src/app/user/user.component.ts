@@ -93,7 +93,7 @@ export class UserComponent implements OnInit {
         this.status.stats.paidText = this.dataService.getReadableCoins(this.data, this.status.stats.paid, 4);
         this.status.stats.balanceText = this.dataService.getReadableCoins(this.data, this.status.stats.balance, 4);
         this.status.stats.hashrate = this.status.stats.hashrate || '0 H';
-        this.createUserCharts(data);
+        this.createUserCharts(this.data, data);
         this.renderPayments(this.status.payments);
       }
     });
@@ -176,7 +176,7 @@ export class UserComponent implements OnInit {
     }
   }
 
-  createUserCharts(data) {
+  createUserCharts(status, data) {
     var userGraphStat = {
       hashrate: {
         type: 'line',
@@ -211,14 +211,14 @@ export class UserComponent implements OnInit {
     };
     for (var chart in userGraphStat) {
       if (data['charts'][chart] && data['charts'][chart].length) {
-        var graphData = this.getGraphData(data['charts'][chart], chart == 'payments');
+        var graphData = this.getGraphData(status, data['charts'][chart], chart == 'payments');
         userGraphStat[chart].tooltipValueLookups = { names: graphData.names };
         $('[data-chart=user_' + chart + ']').show().find('.chart').sparkline(graphData.values, userGraphStat[chart]);
       }
     }
   }
 
-  getGraphData(rawData, fixValueToCoins) {
+  getGraphData(status, rawData, fixValueToCoins) {
     var graphData = {
       names: [],
       values: []
@@ -226,7 +226,7 @@ export class UserComponent implements OnInit {
     if (rawData) {
       for (var i = 0, xy; xy = rawData[i]; i++) {
         graphData.names.push(new Date(xy[0] * 1000).toUTCString());
-        graphData.values.push(fixValueToCoins ? this.dataService.getReadableCoins(xy[1], 4, true) : xy[1]);
+        graphData.values.push(fixValueToCoins ? this.dataService.getReadableCoins(status, xy[1], 4, true) : xy[1]);
       }
     }
 
