@@ -88,7 +88,6 @@ export class UserComponent implements OnInit {
       console.log(data);
       if (Object.keys(data).length > 0) {
         this.status = data;
-        console.log("inside new status");
         this.status.stats.lastShareTime = this.dataService.timeAgo(this.status.stats.lastShare);
         this.status.stats.paidText = this.dataService.getReadableCoins(this.data, this.status.stats.paid, 4);
         this.status.stats.balanceText = this.dataService.getReadableCoins(this.data, this.status.stats.balance, 4);
@@ -124,7 +123,7 @@ export class UserComponent implements OnInit {
   getPaymentCells(payment) {
     return '<td>' + this.formatDate(payment.time) + '</td>' +
       '<td>' + this.formatPaymentLink(payment.hash) + '</td>' +
-      '<td>' + this.dataService.getReadableCoins(payment.amount, 4, true) + '</td>' +
+      '<td>' + this.dataService.getReadableCoins(this.data, payment.amount, 4, true) + '</td>' +
       '<td>' + payment.mixin + '</td>';
   }
 
@@ -232,6 +231,20 @@ export class UserComponent implements OnInit {
 
 
     return graphData;
+  }
+
+  loadMore() {
+    this.dataService.get(this.dataService.config.api + '/get_payments',
+      {
+        address: this.address,
+        time: $('#payments_rows').children().last().data('time')
+      }).subscribe(data => {
+        if (Object.keys(data).length > 0) {
+          this.renderPayments(data);
+        } else {
+          $('#loadMorePayments').text('没有更多的数据了!').attr('disable', 'disable');
+        }
+      });
   }
 
 
