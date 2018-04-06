@@ -242,7 +242,7 @@ export class UserComponent implements OnInit {
         if (Object.keys(data).length > 0) {
           this.renderPayments(data);
         } else {
-          $('#loadMorePayments').text('没有更多的数据了!').attr('disable', 'disable');
+          $('#loadMorePayments').text('没有更多的数据了!').prop('disabled', true);;
         }
       });
   }
