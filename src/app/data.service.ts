@@ -13,6 +13,7 @@ export class DataService {
     api_blockexplorer: "http://vig-pool.tyk.im:19810",
 
     poolHost: "vig-pool.tyk.im",
+    poolPort: 6666,
 
     irc: "irc.freenode.net/#vig",
 

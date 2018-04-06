@@ -15,7 +15,7 @@
 
 </div>
 
-<div class="row">
+<div class="row" *ngIf="address">
   <div class="col-sm-4 stats">
     <div id="addressError"></div>
     <!-- <div class="yourStats"><i class="fa fa-key"></i> Address: <span id="yourAddressDisplay"></span></div> -->
@@ -42,7 +42,7 @@
     </div>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="address">
   <br class="yourStats">
 
   <h4 class="yourStats">支付</h4>

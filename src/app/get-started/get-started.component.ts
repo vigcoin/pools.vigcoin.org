@@ -8,9 +8,11 @@ declare var $: any;
   templateUrl: './get-started.component.html',
   styleUrls: ['./get-started.component.css']
 })
+
 export class GetStartedComponent implements OnInit {
   status
   config
+  ports
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
@@ -18,47 +20,8 @@ export class GetStartedComponent implements OnInit {
     this.dataService.get(this.dataService.config.api + '/stats').subscribe(data => {
       if (Object.keys(data).length > 0) {
         this.status = data;
-        console.log(this.status);
+        this.ports = this.status.config.ports;
       }
     });
-
-    let currentPage = {
-      destroy: function () {
-
-      },
-      init: function () {
-      },
-      update: function () {
-
-        var portsJson = JSON.stringify(this.status.config.ports);
-        if (lastPortsJson !== portsJson) {
-          lastPortsJson = portsJson;
-          var $miningPortChildren = [];
-          for (var i = 0; i < this.status.config.ports.length; i++) {
-            var portData = this.status.config.ports[i];
-            var $portChild = $(miningPortTemplate);
-            $portChild.find('.miningPort').text(portData.port);
-            $portChild.find('.miningPortDiff').text(portData.difficulty);
-            $portChild.find('.miningPortDesc').text(portData.desc);
-            $miningPortChildren.push($portChild);
-          }
-          $miningPorts.empty().append($miningPortChildren);
-        }
-
-        // updateTextClasses('exampleHost', poolHost);
-        // updateTextClasses('examplePort', lastStats.config.ports[0].port.toString());
-
-      }
-    };
-
-    // document.getElementById('easyminer_link').setAttribute('href', easyminerDownload);
-    // document.getElementById('miningPoolHost').textContent = poolHost;
-
-    var lastPortsJson = '';
-    var $miningPorts = $('#miningPorts');
-    var miningPortTemplate = $miningPorts.html();
-    $miningPorts.empty();
-
   }
-
-}
+};
