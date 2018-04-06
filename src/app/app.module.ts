@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { RoutingModule } from './routing/routing.module';
 
 import { DataService } from './data.service';
 
@@ -12,6 +12,8 @@ import { NavigatorComponent } from './navigator/navigator.component';
 import { StatusComponent } from './status/status.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserComponent, DocCookies } from './user/user.component';
+import { HomeComponent } from './home/home.component';
+import { GetStartedComponent } from './get-started/get-started.component';
 
 
 @NgModule({
@@ -21,12 +23,15 @@ import { UserComponent, DocCookies } from './user/user.component';
     NavigatorComponent,
     StatusComponent,
     FooterComponent,
-    UserComponent
+    UserComponent,
+    HomeComponent,
+    GetStartedComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RoutingModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

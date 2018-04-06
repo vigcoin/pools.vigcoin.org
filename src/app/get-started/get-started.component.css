@@ -1,0 +1,46 @@
+    hr{
+        border-top-color: #d9d9d9;
+        margin-top: 40px !important;
+        margin-bottom: 40px !important;
+    }
+    #miningPorts > .stats{
+        width: auto !important;
+        margin-right: 70px;
+        margin-left: 15px;
+        display: inline-block;
+    }
+    #miningPorts > .stats:last-child{
+        margin-right: 0;
+    }
+    .getting_started_windows{
+        line-height: 40px;
+    }
+    #getting_started_list > li{
+        margin-bottom: 20px;
+    }
+    #mining_apps > tr:first-child > td{
+        padding-top: 35px;
+    }
+    #mining_apps > tr > td{
+        border-top: none;
+    }
+    #mining_apps > tr:nth-child(even) > td{
+        border-bottom: 1px solid #e5e5e5;
+        padding-bottom: 20px;
+    }
+    #mining_apps > tr:nth-child(odd) > td{
+        padding-top: 20px;
+    }
+    #mining_apps{
+        margin-top: 10px;
+    }
+    .miningAppTitle{
+        font-weight: bold;
+    }
+    .exampleAddress{
+        font-style: italic;
+    }
+    #cpuminer_code{
+        display: inline-block;
+        white-space: normal;
+    }
