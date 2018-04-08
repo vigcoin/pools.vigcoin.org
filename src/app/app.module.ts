@@ -14,6 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { UserComponent, DocCookies } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { GetStartedComponent } from './get-started/get-started.component';
+import { PoolBlocksComponent } from './pool-blocks/pool-blocks.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { GetStartedComponent } from './get-started/get-started.component';
     FooterComponent,
     UserComponent,
     HomeComponent,
-    GetStartedComponent
+    GetStartedComponent,
+    PoolBlocksComponent
   ],
   imports: [
     BrowserModule,

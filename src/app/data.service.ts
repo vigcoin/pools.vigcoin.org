@@ -7,6 +7,7 @@ import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class DataService {
+  status
   config: any = {
     api: "http://vig-pool.tyk.im:8119",
 
@@ -44,7 +45,24 @@ export class DataService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    this.get(this.config.api + '/stats').subscribe(data => {
+      if (Object.keys(data).length > 0) {
+        this.status = data;
+      }
+    });
+  }
+
+  getStatus() {
+    if (this.status) {
+      return this.status;
+    }
+    this.get(this.config.api + '/stats').subscribe(data => {
+      if (Object.keys(data).length > 0) {
+        this.status = data;
+      }
+    });
+  }
 
   get(url, params = undefined) {
     return this.http.get(url, { params: params });
