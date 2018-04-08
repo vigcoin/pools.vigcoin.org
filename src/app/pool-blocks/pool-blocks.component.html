@@ -1,7 +1,7 @@
 <div class="container">
   <div class="blocksStatHolder">
     <span class="bg-primary">全部挖出的块: <span id="blocksTotal">{{status?.pool.totalBlocks}}</span></span>
-    <span class="bg-info">成熟深度要求: <span id="blocksMaturityCount">{{status?.pool.depth}}</span></span>
+    <span class="bg-info">成熟深度要求: <span id="blocksMaturityCount">{{status?.config.depth}}</span></span>
   </div>
 
   <hr>
@@ -25,6 +25,6 @@
   </div>
 
   <p class="text-center">
-    <button type="button" class="btn btn-default" id="loadMoreBlocks">加载更多</button>
+    <button type="button" class="btn btn-default" id="loadMoreBlocks" (click)="getMore()">加载更多</button>
   </p>
 </div>

@@ -17,16 +17,17 @@ export class CaculatorComponent implements OnInit {
   ngOnInit() {
   }
 
-    ngOnChanges() {
-      if(this.data) {
-        this.symbol = this.data.config.symbol
-      }
+  ngOnChanges() {
+    if (this.data) {
+      this.symbol = this.data.config.symbol
     }
+  }
 
   changeUnits(text, unit) {
     this.text = text;
     this.unit = unit;
     this.calcEstimateProfit();
+    return false;
   }
 
   calcEstimateProfit() {

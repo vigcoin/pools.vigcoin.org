@@ -46,11 +46,10 @@ export class DataService {
   constructor(
     private http: HttpClient
   ) {
-    this.get(this.config.api + '/stats').subscribe(data => {
-      if (Object.keys(data).length > 0) {
-        this.status = data;
-      }
-    });
+  }
+
+  onInit() {
+    this.getStatus();
   }
 
   getStatus() {
@@ -118,8 +117,11 @@ export class DataService {
     return formatAmounts(amount, units[i - 1][1]);
   }
 
+  getBlockchainUrl(status, id) {
+    return this.hashToUrl(status, id);
+  }
+
   hashToUrl(status, id) {
-    console.log(this.config.blockchainExplorer);
     let explorer = this.config.blockchainExplorer;
     return explorer.replace('{symbol}', status.config.symbol.toLowerCase()).replace('{id}', id);
   }
@@ -127,6 +129,11 @@ export class DataService {
   getReadableCoins(status, coins, digits, withoutSymbol = null) {
     var amount = (parseInt(coins || 0) / status.config.coinUnits).toFixed(digits || status.config.coinUnits.toString().length - 1);
     return amount + (withoutSymbol ? '' : (' ' + status.config.symbol));
+  }
+
+  formatDate(time) {
+    if (!time) return '';
+    return new Date(parseInt(time) * 1000).toLocaleString();
   }
 
   hashRateWithUnit(hashrate) {

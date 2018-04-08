@@ -7,7 +7,7 @@ import { PoolBlocksComponent } from '../pool-blocks/pool-blocks.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'getting_started', component: GetStartedComponent },
   { path: 'blocks/pool', component: PoolBlocksComponent }
@@ -16,7 +16,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { useHash: true })
   ],
   declarations: [],
   exports: [RouterModule]
