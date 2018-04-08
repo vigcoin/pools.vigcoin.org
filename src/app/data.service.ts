@@ -26,7 +26,7 @@ export class DataService {
 
     blockchainExplorer: "/?hash={id}#blockchain_block",
 
-    transactionExplorer: "/?hash={id}#blockchain_transaction",
+    transactionExplorer: "/blockchina/transaction/{id}",
 
     themeCss: "themes/default-theme.css",
 
