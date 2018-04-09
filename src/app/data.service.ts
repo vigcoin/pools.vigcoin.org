@@ -48,19 +48,15 @@ export class DataService {
   ) {
   }
 
-  onInit() {
-    this.getStatus();
-  }
-
   getStatus() {
     if (this.status) {
-      return this.status;
+      return of(this.status);
     }
     this.get(this.config.api + '/stats').subscribe(data => {
       if (Object.keys(data).length > 0) {
         this.status = data;
       }
-    });
+    })
   }
 
   get(url, params = undefined) {
@@ -123,6 +119,11 @@ export class DataService {
 
   hashToUrl(status, id) {
     let explorer = this.config.blockchainExplorer;
+    return explorer.replace('{symbol}', status.config.symbol.toLowerCase()).replace('{id}', id);
+  }
+
+  getTransactionUrl(status, id) {
+    let explorer = this.config.transactionExplorer;
     return explorer.replace('{symbol}', status.config.symbol.toLowerCase()).replace('{id}', id);
   }
 

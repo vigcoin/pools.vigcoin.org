@@ -4,12 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { GetStartedComponent } from '../get-started/get-started.component';
 import { PoolBlocksComponent } from '../pool-blocks/pool-blocks.component';
+import { PaymentsComponent } from '../payments/payments.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'getting_started', component: GetStartedComponent },
+  { path: 'payments', component: PaymentsComponent },
   { path: 'blocks/pool', component: PoolBlocksComponent }
 ];
 
