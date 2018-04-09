@@ -18,6 +18,7 @@ import { PoolBlocksComponent } from './pool-blocks/pool-blocks.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { BlockchainComponent } from './blockchain/blockchain.component';
 import { NetworksComponent } from './networks/networks.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { NetworksComponent } from './networks/networks.component';
     PoolBlocksComponent,
     PaymentsComponent,
     BlockchainComponent,
-    NetworksComponent
+    NetworksComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

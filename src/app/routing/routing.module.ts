@@ -7,6 +7,7 @@ import { PoolBlocksComponent } from '../pool-blocks/pool-blocks.component';
 import { PaymentsComponent } from '../payments/payments.component';
 import { BlockchainComponent } from '../blockchain/blockchain.component';
 import { NetworksComponent } from '../networks/networks.component';
+import { ContactComponent } from '../contact/contact.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'payments', component: PaymentsComponent },
   { path: 'blocks/pool', component: PoolBlocksComponent },
   { path: 'blockchain', component: BlockchainComponent },
-  { path: 'networks', component: NetworksComponent }
+  { path: 'networks', component: NetworksComponent },
+  { path: 'contact', component: ContactComponent }
 ];
 
 @NgModule({
