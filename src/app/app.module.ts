@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { GetStartedComponent } from './get-started/get-started.component';
 import { PoolBlocksComponent } from './pool-blocks/pool-blocks.component';
 import { PaymentsComponent } from './payments/payments.component';
+import { BlockchainComponent } from './blockchain/blockchain.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { PaymentsComponent } from './payments/payments.component';
     HomeComponent,
     GetStartedComponent,
     PoolBlocksComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    BlockchainComponent
   ],
   imports: [
     BrowserModule,

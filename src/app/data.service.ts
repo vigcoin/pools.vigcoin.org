@@ -148,4 +148,9 @@ export class DataService {
   }
 
 
+  getReadableHashRateString(hashrate) {
+    return this.hashRateWithUnit(hashrate);
+  }
+
+
 }

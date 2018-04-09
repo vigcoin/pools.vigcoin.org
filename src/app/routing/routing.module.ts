@@ -5,6 +5,7 @@ import { HomeComponent } from '../home/home.component';
 import { GetStartedComponent } from '../get-started/get-started.component';
 import { PoolBlocksComponent } from '../pool-blocks/pool-blocks.component';
 import { PaymentsComponent } from '../payments/payments.component';
+import { BlockchainComponent } from '../blockchain/blockchain.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'getting_started', component: GetStartedComponent },
   { path: 'payments', component: PaymentsComponent },
-  { path: 'blocks/pool', component: PoolBlocksComponent }
+  { path: 'blocks/pool', component: PoolBlocksComponent },
+  { path: 'blockchain', component: BlockchainComponent }
 ];
 
 @NgModule({
