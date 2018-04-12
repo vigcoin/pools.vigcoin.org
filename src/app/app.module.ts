@@ -15,6 +15,10 @@ import { UserComponent, DocCookies } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { GetStartedComponent } from './get-started/get-started.component';
 import { PoolBlocksComponent } from './pool-blocks/pool-blocks.component';
+import { PaymentsComponent } from './payments/payments.component';
+import { BlockchainComponent } from './blockchain/blockchain.component';
+import { NetworksComponent } from './networks/networks.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -27,7 +31,11 @@ import { PoolBlocksComponent } from './pool-blocks/pool-blocks.component';
     UserComponent,
     HomeComponent,
     GetStartedComponent,
-    PoolBlocksComponent
+    PoolBlocksComponent,
+    PaymentsComponent,
+    BlockchainComponent,
+    NetworksComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

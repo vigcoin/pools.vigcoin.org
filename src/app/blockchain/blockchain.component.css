@@ -1,0 +1,27 @@
+    .blocksStatHolder span {
+      display: inline-block;
+      border-radius: 5px;
+      padding: 8px 20px;
+      border: 1px solid #e5e5e5;
+      margin: 2px;
+    }
+
+    .blocksStatHolder>span>span {
+      font-weight: bold;
+      padding: 8px 20px;
+    }
+
+    #blocks_rows>tr>td {
+      vertical-align: middle;
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.95em;
+      text-align: center;
+    }
+
+    .luckGood {
+      color: darkgreen;
+    }
+
+    .luckBad {
+      color: darkred;
+    }

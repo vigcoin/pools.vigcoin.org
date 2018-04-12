@@ -48,19 +48,15 @@ export class DataService {
   ) {
   }
 
-  onInit() {
-    this.getStatus();
-  }
-
   getStatus() {
     if (this.status) {
-      return this.status;
+      return of(this.status);
     }
     this.get(this.config.api + '/stats').subscribe(data => {
       if (Object.keys(data).length > 0) {
         this.status = data;
       }
-    });
+    })
   }
 
   get(url, params = undefined) {
@@ -126,6 +122,11 @@ export class DataService {
     return explorer.replace('{symbol}', status.config.symbol.toLowerCase()).replace('{id}', id);
   }
 
+  getTransactionUrl(status, id) {
+    let explorer = this.config.transactionExplorer;
+    return explorer.replace('{symbol}', status.config.symbol.toLowerCase()).replace('{id}', id);
+  }
+
   getReadableCoins(status, coins, digits, withoutSymbol = null) {
     var amount = (parseInt(coins || 0) / status.config.coinUnits).toFixed(digits || status.config.coinUnits.toString().length - 1);
     return amount + (withoutSymbol ? '' : (' ' + status.config.symbol));
@@ -144,6 +145,11 @@ export class DataService {
       i++;
     }
     return hashrate.toFixed(2) + byteUnits[i];
+  }
+
+
+  getReadableHashRateString(hashrate) {
+    return this.hashRateWithUnit(hashrate);
   }
 
 
