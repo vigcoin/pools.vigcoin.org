@@ -61,7 +61,7 @@ export class StatusComponent implements OnInit {
       spotRadius: 3,
       chartRangeMin: 0,
       drawNormalOnTop: false,
-      tooltipFormat: '<p style="margin-right:10px">{{y}} , {{offset:names}}</p>'
+      tooltipFormat: '<p style="margin-right:10px" >{{y}} , {{offset:names}}</p>'
     };
     if (data.hasOwnProperty("charts")) {
       var graphData = {
