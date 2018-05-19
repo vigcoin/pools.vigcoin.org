@@ -75,7 +75,7 @@ export class StatusComponent implements OnInit {
       for (var graphType in graphData) {
         if (graphData[graphType].values.length > 1) {
           var settings: any = currencyGraphStat;
-          settings.tooltipValueLookups = { names: graphData[graphType].names; };
+          settings.tooltipValueLookups = { names: graphData[graphType].names };
           var $chart = $('[data-chart=' + graphType + '] .chart');
           $chart.closest('.chartWrap').show();
           $chart.sparkline(graphData[graphType].values, settings);
