@@ -35,7 +35,7 @@ export class StatusComponent implements OnInit {
     };
     if (rawData) {
       for (var i = 0, xy; xy = rawData[i]; i++) {
-        graphData.names.push(new Date(xy[0] * 1000).toUTCString());
+        graphData.names.push(new Date(xy[0] * 1000).toLocaleString());
         graphData.values.push(fixValueToCoins ? this.getReadableCoins(xy[1], 4, true) : xy[1]);
       }
     }
@@ -61,7 +61,7 @@ export class StatusComponent implements OnInit {
       spotRadius: 3,
       chartRangeMin: 0,
       drawNormalOnTop: false,
-      tooltipFormat: '<b>{{y}}</b>, {{offset:names}}'
+      tooltipFormat: '<p align-items="center">{{y}} , {{offset:names}}  ..</p> '
     };
     if (data.hasOwnProperty("charts")) {
       var graphData = {
@@ -75,7 +75,7 @@ export class StatusComponent implements OnInit {
       for (var graphType in graphData) {
         if (graphData[graphType].values.length > 1) {
           var settings: any = currencyGraphStat;
-          settings.tooltipValueLookups = { names: graphData[graphType].names };
+          settings.tooltipValueLookups = { names: graphData[graphType].names; };
           var $chart = $('[data-chart=' + graphType + '] .chart');
           $chart.closest('.chartWrap').show();
           $chart.sparkline(graphData[graphType].values, settings);
