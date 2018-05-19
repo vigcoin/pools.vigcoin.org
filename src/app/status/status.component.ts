@@ -35,7 +35,7 @@ export class StatusComponent implements OnInit {
     };
     if (rawData) {
       for (var i = 0, xy; xy = rawData[i]; i++) {
-        graphData.names.push(new Date(xy[0] * 1000).toLocaleString());//graphData.names.push(new Date(xy[0] * 1000).toUTCString());
+        graphData.names.push(new Date(xy[0] * 1000).toLocaleString());
         graphData.values.push(fixValueToCoins ? this.getReadableCoins(xy[1], 4, true) : xy[1]);
       }
     }
