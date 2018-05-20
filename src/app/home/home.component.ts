@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     // Periodical Get status
     Observable.interval(this.dataService.config.interval || 10000).subscribe((v) => {
       console.log("v = " + v);
-      this.dataService.get(this.dataService.config.api + '/live_stats' ).subscribe(data => {
+      this.dataService.get(this.dataService.config.api + '/live_stats'  ).subscribe(data => {
         if (Object.keys(data).length > 0) {
           this.status = data;
           this.updateStatus();
