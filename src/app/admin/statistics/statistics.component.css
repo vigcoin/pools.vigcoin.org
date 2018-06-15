@@ -1,0 +1,44 @@
+.adminStats>div {
+    min-height: 127px;
+    color: #2E3D31;
+    position: relative;
+    -webkit-box-shadow: inset 0px 0px 0 1px #ffffff;
+    box-shadow: inset 0px 0px 0 1px #ffffff;
+    background-color: #EBEBEB;
+}
+
+.adminStats .statValue {
+    position: absolute;
+    display: block;
+    padding: 0 10px;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    line-height: 100px;
+    text-align: center;
+    word-wrap: break-word;
+    font-size: 17px;
+}
+
+.adminStats .statValue.lead {
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.adminStats h4 {
+    text-align: right;
+    font-size: 18px;
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    margin: 0;
+    color: #26839B;
+}
+
+.adminStats .statsTitle h3 {
+    line-height: 127px;
+    margin: 0;
+    color: #00C1FF;
+    text-align: center;
+}

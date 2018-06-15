@@ -157,5 +157,5 @@ export class DataService {
     return this.hashRateWithUnit(hashrate);
   }
 
-
+ 
 }

@@ -1,0 +1,16 @@
+.usersList {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+.usersList .tooltip-inner {
+    max-width: 100%;
+}
+
+.usersList .sort {
+    cursor: pointer;
+}
+
+.usersList tr>th:first-child {
+    width: 40%;
+}

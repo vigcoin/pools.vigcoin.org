@@ -8,6 +8,10 @@ import { PaymentsComponent } from '../payments/payments.component';
 import { BlockchainComponent } from '../blockchain/blockchain.component';
 import { NetworksComponent } from '../networks/networks.component';
 import { ContactComponent } from '../contact/contact.component';
+import { AdminComponent } from '../admin/admin.component';
+import { StatisticsComponent } from '../admin/statistics/statistics.component';
+import { MonitoringComponent } from '../admin/monitoring/monitoring.component';
+import { UserslistComponent } from '../admin/userslist/userslist.component';
 
 
 const routes: Routes = [
@@ -18,7 +22,11 @@ const routes: Routes = [
   { path: 'blocks/pool', component: PoolBlocksComponent },
   { path: 'blockchain', component: BlockchainComponent },
   { path: 'networks', component: NetworksComponent },
-  { path: 'contact', component: ContactComponent }
+  { path: 'contact', component: ContactComponent },
+  { path: 'admin', redirectTo: 'admin/statistics', pathMatch: 'full' },
+  { path: 'admin/statistics', component: StatisticsComponent },
+  { path: 'admin/monitoring', component: MonitoringComponent },
+  { path: 'admin/userslist', component: UserslistComponent }
 ];
 
 @NgModule({
