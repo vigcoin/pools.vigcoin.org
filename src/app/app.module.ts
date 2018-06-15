@@ -19,6 +19,12 @@ import { PaymentsComponent } from './payments/payments.component';
 import { BlockchainComponent } from './blockchain/blockchain.component';
 import { NetworksComponent } from './networks/networks.component';
 import { ContactComponent } from './contact/contact.component';
+import { AdminComponent } from './admin/admin.component';
+import { StatisticsComponent } from './admin/statistics/statistics.component';
+import { MonitoringComponent } from './admin/monitoring/monitoring.component';
+import { UserslistComponent } from './admin/userslist/userslist.component';
+import { AdminNavigatorComponent } from './admin/admin-navigator/admin-navigator.component';
+
 
 
 @NgModule({
@@ -35,7 +41,13 @@ import { ContactComponent } from './contact/contact.component';
     PaymentsComponent,
     BlockchainComponent,
     NetworksComponent,
-    ContactComponent
+    ContactComponent,
+    AdminComponent,
+    StatisticsComponent,
+    MonitoringComponent,
+    UserslistComponent,
+    AdminNavigatorComponent
+
   ],
   imports: [
     BrowserModule,
