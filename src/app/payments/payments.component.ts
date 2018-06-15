@@ -8,8 +8,8 @@ declare var $: any;
   styleUrls: ['./payments.component.css']
 })
 export class PaymentsComponent implements OnInit {
-  config
-  status
+  config?;
+  status?;
 
   constructor(private dataService: DataService) { }
 
@@ -18,9 +18,10 @@ export class PaymentsComponent implements OnInit {
     this.dataService.get(this.config.api + '/stats').subscribe(data => {
       if (Object.keys(data).length > 0) {
         this.status = data;
-        this.status.config.minPaymentThresholdText = this.dataService.getReadableCoins(this.status, this.status.config.minPaymentThreshold, 2);
-        this.status.config.denominationUnitText = this.dataService.getReadableCoins(this.status, this.status.config.denominationUnit, 2);
-
+        this.status.config.minPaymentThresholdText =
+          this.dataService.getReadableCoins(this.status, this.status.config.minPaymentThreshold, 2);
+        this.status.config.denominationUnitText =
+          this.dataService.getReadableCoins(this.status, this.status.config.denominationUnit, 2);
         this.renderPayments(this.status.pool.payments);
       }
     });
