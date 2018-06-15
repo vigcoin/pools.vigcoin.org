@@ -1,0 +1,35 @@
+﻿<app-admin-navigator [status]="status">
+</app-admin-navigator>
+
+<div class="container">
+	<div class="row adminStats">
+		<div class="col-sm-3 color1">
+			<h4>未付统计</h4>
+			<span class="statValue" id="totalOwed">{{data?.lastTotalOwed}}</span>
+		</div>
+		<div class="col-sm-3 color2">
+			<h4>已付统计</h4>
+			<span class="statValue" id="totalPaid">{{data?.lastTotalPaid}}</span>
+		</div>
+		<div class="col-sm-3 color3">
+			<h4>采矿量统计</h4>
+			<span class="statValue" id="totalMined">{{data?.lastTotalMined}}</span>
+		</div>
+		<div class="col-sm-3 color4">
+			<h4>利润(未扣除交易费)</h4>
+			<span class="statValue" id="profit">{{data?.lastProfit}}</span>
+		</div>
+		<div class="col-sm-4 color5">
+			<h4>平均出块率(算力/难度)</h4>
+			<span class="statValue lead" id="averageLuck">{{data?.lastAverageLuck}}</span>
+		</div>
+		<div class="col-sm-4 color6">
+			<h4>孤链百分比</h4>
+			<span class="statValue lead" id="orphanPercent">{{data?.lastOrphanPercent}}</span>
+		</div>
+		<div class="col-sm-4 color7">
+			<h4>注册地址统计</h4>
+			<span class="statValue lead" id="registeredAddresses">{{data?.lastRegisteredAddresses}}</span>
+		</div>
+	</div>
+</div>
