@@ -19,11 +19,11 @@
   <div class="col-sm-4 stats">
     <div id="addressError"></div>
     <!-- <div class="yourStats"><i class="fa fa-key"></i> Address: <span id="yourAddressDisplay"></span></div> -->
-    <div class="yourStats"><i class="fa fa-bank"></i> 未支付: <span id="yourPendingBalance">{{status?.stats.balanceText}}</span></div>
-    <div class="yourStats"><i class="fa fa-money"></i> 全部已支付: <span id="yourPaid">{{status?.stats.paidText}}</span></div>
-    <div class="yourStats"><i class="fa fa-clock-o"></i> 最后提交分额: <span id="yourLastShare">{{status?.stats.lastShareTime}}</span></div>
-    <div class="yourStats"><i class="fa fa-tachometer"></i> 算力: <span id="yourHashrateHolder">{{status?.stats.hashrate}} / 秒</span></div>
-    <div class="yourStats"><i class="fa fa-cloud-upload"></i> 总哈希提交: <span id="yourHashes">{{status?.stats.hashes}}</span></div>
+    <div class="yourStats"><i class="fa fa-bank"></i> 未支付: <span id="yourPendingBalance">{{status?.stats?.balanceText || "0.0"}}</span></div>
+    <div class="yourStats"><i class="fa fa-money"></i> 全部已支付: <span id="yourPaid">{{status?.stats?.paidText || "0.0"}}</span></div>
+    <div class="yourStats"><i class="fa fa-clock-o"></i> 最后提交分额: <span id="yourLastShare">{{status?.stats?.lastShareTime || "0.0"}}</span></div>
+    <div class="yourStats"><i class="fa fa-tachometer"></i> 算力: <span id="yourHashrateHolder">{{status?.stats?.hashrate || "0.0"}} / 秒</span></div>
+    <div class="yourStats"><i class="fa fa-cloud-upload"></i> 总哈希提交: <span id="yourHashes">{{status?.stats?.hashes || "0"}}</span></div>
   </div>
   <div class="col-sm-4">
     <div class="userChart" data-chart="user_hashrate">

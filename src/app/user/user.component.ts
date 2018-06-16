@@ -1,43 +1,50 @@
 import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { DataService } from '../data.service';
-import { Observable } from 'rxjs/Rx';
-declare var $: any;
+import { Observable } from 'rxjs/Observable';
+declare const $: any;
 
 @Injectable()
 export class DocCookies {
   getItem(key) {
-    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" +
+    return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' +
       encodeURIComponent(key).replace(/[\-\.\+\*]/g,
-        "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+        '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
   }
 
-  setItem(sKey, sValue, vEnd, sPath = '', sDomain = "", bSecure = false) {
+  setItem(sKey, sValue, vEnd, sPath = '', sDomain = '', bSecure = false) {
     if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
-    var sExpires = "";
+    let sExpires = '';
     if (vEnd) {
       switch (vEnd.constructor) {
         case Number:
-          sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+          sExpires = vEnd === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + vEnd;
           break;
         case String:
-          sExpires = "; expires=" + vEnd;
+          sExpires = '; expires=' + vEnd;
           break;
         case Date:
-          sExpires = "; expires=" + vEnd.toUTCString();
+          sExpires = '; expires=' + vEnd.toUTCString();
           break;
       }
     }
-    document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+    document.cookie = encodeURIComponent(sKey) + '=' +
+      encodeURIComponent(sValue) + sExpires + (sDomain
+        ? '; domain=' + sDomain
+        : '') + (sPath ? '; path=' + sPath : '') + (bSecure ? '; secure' : '');
     return true;
   }
 
   removeItem(sKey, sPath, sDomain) {
     if (!sKey || !this.hasItem(sKey)) { return false; }
-    document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "");
+    document.cookie = encodeURIComponent(sKey)
+      + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT'
+      + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '');
     return true;
   }
   hasItem(sKey) {
-    return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+    return (new RegExp('(?:^|;\\s*)'
+      + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&')
+      + '\\s*\\=')).test(document.cookie);
   }
 
 }
@@ -52,7 +59,7 @@ export class UserComponent implements OnInit {
   @Input() data;
   address;
   query = false;
-  status
+  status;
 
   constructor(private dataService: DataService, private docCookies: DocCookies) {
 
@@ -65,7 +72,7 @@ export class UserComponent implements OnInit {
     }
     // Periodical Get Address Info
     Observable.interval(this.dataService.config.interval || 10000).subscribe((v) => {
-      console.log("v = " + v);
+      console.log('v = ' + v);
       if (this.address) {
         this.getAddressStatus(this.address);
       }
@@ -86,7 +93,7 @@ export class UserComponent implements OnInit {
     this.dataService.get(this.dataService.config.api + '/stats_address', { address: this.address, longpoll: false }).subscribe(data => {
       this.query = false;
       console.log(data);
-      if (Object.keys(data).length > 0) {
+      if (data && !data['error'] && Object.keys(data).length > 0) {
         this.status = data;
         this.status.stats.lastShareTime = this.dataService.timeAgo(this.status.stats.lastShare);
         this.status.stats.paidText = this.dataService.getReadableCoins(this.data, this.status.stats.paid, 4);
@@ -100,9 +107,9 @@ export class UserComponent implements OnInit {
 
 
   parsePayment(time, serializedPayment) {
-    var parts = serializedPayment.split(':');
+    const parts = serializedPayment.split(':');
     return {
-      time: parseInt(time),
+      time: parseInt(time, 10),
       hash: parts[0],
       amount: parts[1],
       fee: parts[2],
@@ -112,8 +119,8 @@ export class UserComponent implements OnInit {
   }
 
   formatDate(time) {
-    if (!time) return '';
-    return new Date(parseInt(time) * 1000).toLocaleString();
+    if (!time) { return ''; }
+    return new Date(parseInt(time, 10) * 1000).toLocaleString();
   }
 
   formatPaymentLink(hash) {
@@ -129,7 +136,7 @@ export class UserComponent implements OnInit {
 
   getPaymentRowElement(payment, jsonString) {
 
-    var row = document.createElement('tr');
+    const row = document.createElement('tr');
     row.setAttribute('data-json', jsonString);
     row.setAttribute('data-time', payment.time);
     row.setAttribute('id', 'paymentRow' + payment.time);
@@ -141,42 +148,41 @@ export class UserComponent implements OnInit {
 
   renderPayments(paymentsResults) {
 
-    var $paymentsRows = $('#payments_rows');
+    const $paymentsRows = $('#payments_rows');
 
-    for (var i = 0; i < paymentsResults.length; i += 2) {
+    for (let i = 0; i < paymentsResults.length; i += 2) {
 
-      var payment = this.parsePayment(paymentsResults[i + 1], paymentsResults[i]);
+      const payment = this.parsePayment(paymentsResults[i + 1], paymentsResults[i]);
 
-      var paymentJson = JSON.stringify(payment);
+      const paymentJson = JSON.stringify(payment);
 
-      var existingRow = document.getElementById('paymentRow' + payment.time);
+      const existingRow = document.getElementById('paymentRow' + payment.time);
 
       if (existingRow && existingRow.getAttribute('data-json') !== paymentJson) {
         $(existingRow).replaceWith(this.getPaymentRowElement(payment, paymentJson));
-      }
-      else if (!existingRow) {
+      } else if (!existingRow) {
+        const paymentElement = this.getPaymentRowElement(payment, paymentJson);
 
-        var paymentElement = this.getPaymentRowElement(payment, paymentJson);
-
-        var inserted = false;
-        var rows = $paymentsRows.children().get();
-        for (var f = 0; f < rows.length; f++) {
-          var pTime = parseInt(rows[f].getAttribute('data-time'));
+        let inserted = false;
+        const rows = $paymentsRows.children().get();
+        for (let f = 0; f < rows.length; f++) {
+          const pTime = parseInt(rows[f].getAttribute('data-time'), 10);
           if (pTime < payment.time) {
             inserted = true;
             $(rows[f]).before(paymentElement);
             break;
           }
         }
-        if (!inserted)
+        if (!inserted) {
           $paymentsRows.append(paymentElement);
+        }
       }
 
     }
   }
 
   createUserCharts(status, data) {
-    var userGraphStat = {
+    const userGraphStat = {
       hashrate: {
         type: 'line',
         width: '100%',
@@ -208,9 +214,9 @@ export class UserComponent implements OnInit {
         tooltipFormat: '<b>{{y}}</b>, {{offset:names}}'
       }
     };
-    for (var chart in userGraphStat) {
+    for (const chart in userGraphStat) {
       if (data['charts'][chart] && data['charts'][chart].length) {
-        var graphData = this.getGraphData(status, data['charts'][chart], chart == 'payments');
+        const graphData = this.getGraphData(status, data['charts'][chart], chart === 'payments');
         userGraphStat[chart].tooltipValueLookups = { names: graphData.names };
         $('[data-chart=user_' + chart + ']').show().find('.chart').sparkline(graphData.values, userGraphStat[chart]);
       }
@@ -218,12 +224,12 @@ export class UserComponent implements OnInit {
   }
 
   getGraphData(status, rawData, fixValueToCoins) {
-    var graphData = {
+    const graphData = {
       names: [],
       values: []
     };
     if (rawData) {
-      for (var i = 0, xy; xy = rawData[i]; i++) {
+      for (let i = 0, xy; xy = rawData[i]; i++) {
         graphData.names.push(new Date(xy[0] * 1000).toUTCString());
         graphData.values.push(fixValueToCoins ? this.dataService.getReadableCoins(status, xy[1], 4, true) : xy[1]);
       }
@@ -242,7 +248,7 @@ export class UserComponent implements OnInit {
         if (Object.keys(data).length > 0) {
           this.renderPayments(data);
         } else {
-          $('#loadMorePayments').text('没有更多的数据了!').prop('disabled', true);;
+          $('#loadMorePayments').text('没有更多的数据了!').prop('disabled', true);
         }
       });
   }

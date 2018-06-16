@@ -12,7 +12,7 @@
   <div class="col-md-4 stats">
     <h3>当前矿池</h3>
     <div><i class="fa fa-tachometer"></i> 算力: <span id="poolHashrate">{{data?.pool.hashrateReadable}} / 秒</span></div>
-    <div><i class="fa fa-clock-o"></i> 最后块: <span id="poolLastBlockFound">{{data?.pool.lastBlockTime}}</span></div>
+    <div><i class="fa fa-clock-o"></i> 最后块: <span id="poolLastBlockFound">{{data?.pool.lastBlockTime || "尚未出块"}}</span></div>
     <div><i class="fa fa-users"></i> 在线矿工: <span id="poolMiners">{{data?.pool.miners}}</span></div>
     <!-- <div id="donations"><i class="fa fa-gift"></i> 捐赠: <span id="poolDonations"></span></div> -->
     <div><i class="fa fa-money"></i> 全部矿池费用: <span id="poolFee">{{data?.config.fee}}%</span></div>
