@@ -3,6 +3,7 @@ import { RequestOptions } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import * as _ from 'lodash';
 
 
 @Injectable()
@@ -164,6 +165,10 @@ export class DataService {
     return sub;
   }
 
+  clearAddressStatus() {
+    this.addressStatus = null;
+  }
+
   getBlocks(options) {
     return this.get(this.currentAPI + '/get_blocks', options);
   }
@@ -240,7 +245,11 @@ export class DataService {
   }
 
   getReadableCoins(status, coins, digits, withoutSymbol = null) {
-    const amount = (parseInt(coins || 0, 10) / status.config.coinUnits).toFixed(digits || status.config.coinUnits.toString().length - 1);
+
+    const coinUnits = _.get(status, 'config.coinUnits');
+    const amount = (parseInt(coins || 0, 10)
+      / coinUnits).toFixed(
+        digits || coinUnits.toString().length - 1);
     return amount + (withoutSymbol ? '' : (' ' + status.config.symbol));
   }
 

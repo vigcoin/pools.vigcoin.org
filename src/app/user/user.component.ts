@@ -60,7 +60,7 @@ export class DocCookies {
 export class UserComponent implements OnInit {
   @Input() data;
   address;
-  query = false;
+  isQuery = false;
   status;
 
   constructor(private dataService: DataService, private docCookies: DocCookies) {
@@ -82,18 +82,20 @@ export class UserComponent implements OnInit {
   }
 
   onAddressChange() {
+    this.dataService.clearAddressStatus();
     this.docCookies.setItem('mining_address', this.address, Infinity);
   }
 
   queryAddress() {
+    this.dataService.clearAddressStatus();
     this.getAddressStatus(this.address);
   }
 
   getAddressStatus(address) {
     this.docCookies.setItem('mining_address', address, Infinity);
-    this.query = true;
+    this.isQuery = true;
     this.dataService.getAddressStatus({ address: this.address, longpoll: false }).subscribe(data => {
-      this.query = false;
+      this.isQuery = false;
       console.log(data);
       if (data && !data['error'] && Object.keys(data).length > 0) {
         this.status = data;

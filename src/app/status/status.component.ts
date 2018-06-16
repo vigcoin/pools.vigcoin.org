@@ -27,7 +27,7 @@ export class StatusComponent implements OnInit, OnChanges {
     console.log(this.data);
     this.pools = this.dataService.getPools();
     if (this.pools.length) {
-      this.currentPool = this.pools[0];
+      this.currentPool = this.dataService.getCurrentPool();
     }
   }
 

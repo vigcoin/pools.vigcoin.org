@@ -7,9 +7,9 @@
       <input class="form-control" id="yourStatsInput" type="text" [(ngModel)]="address" (change)="onAddressChange()" placeholder="输入你的钱包地址">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button" id="lookUp">
-          <span (click)="query()" *ngIf="!query">
+          <span (click)="queryAddress()" *ngIf="!isQuery">
             <i class="fa fa-search"></i> 查询</span>
-          <span *ngIf="query">
+          <span *ngIf="isQuery">
             <i class="fa fa-refresh fa-spin"></i> 搜索...</span>
         </button>
       </span>
