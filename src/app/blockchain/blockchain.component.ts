@@ -7,8 +7,8 @@ import { DataService } from '../data.service';
   styleUrls: ['./blockchain.component.css']
 })
 export class BlockchainComponent implements OnInit {
-  config
-  status
+  config;
+  status;
 
   constructor(private dataService: DataService) { }
 
@@ -16,7 +16,7 @@ export class BlockchainComponent implements OnInit {
   ngOnInit() {
     this.config = this.dataService.config;
 
-    this.dataService.get(this.dataService.config.api + '/stats').subscribe(data => {
+    this.dataService.getStatus().subscribe(data => {
       if (Object.keys(data).length > 0) {
         this.status = data;
         this.status.networkHashrate = this.dataService.getReadableHashRateString(

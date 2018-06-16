@@ -10,8 +10,8 @@ declare var $: any;
 })
 export class NetworksComponent implements OnInit {
 
-  config
-  status
+  config;
+  status;
 
   constructor(private dataService: DataService) { }
 
@@ -19,7 +19,7 @@ export class NetworksComponent implements OnInit {
   ngOnInit() {
     this.config = this.dataService.config;
 
-    this.dataService.get(this.dataService.config.api + '/stats').subscribe(data => {
+    this.dataService.getStatus().subscribe(data => {
       if (Object.keys(data).length > 0) {
         this.status = data;
         this.init();

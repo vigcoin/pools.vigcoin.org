@@ -7,16 +7,31 @@ import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class DataService {
+
+  /**
+   * Statuses
+   */
   status;
+  liveStatus;
+  addressStatus;
+
+  /**
+   * Pool urls
+   */
+  urls;
+
+  defaultIndex = 0;
+  currentPool;
+  currentAPI;
   config: any = {
     // api: 'http://localhost:8119',
-    api: 'http://vig-pool.tyk.im:8119',
+    // api: 'http://vig-pool.tyk.im:8119',
     // api: 'http://pool-1.vigcoin.org:8119',
-    api_blockexplorer: 'http://vig-pool.tyk.im:19810',
+    // api_blockexplorer: 'http://vig-pool.tyk.im:19810',
 
-    poolHost: 'vig-pool.tyk.im',
+    // poolHost: 'vig-pool.tyk.im',
 
-    poolPort: 6666,
+    // poolPort: 6666,
 
     irc: 'irc.freenode.net/#vig',
 
@@ -36,11 +51,24 @@ export class DataService {
 
     networkStat: {
       'vig': [
-        ['http://vig-pool.tyk.im', 'http://vig-pool.tyk.im:8119', 'https://pools.vigcoin.org', '主矿池'],
-        ['http://pool-1.vigcoin.org', 'http://pool-1.vigcoin.org:8119', 'https://pools.vigcoin.org', '测试矿池']
-      ],
-      'bcn': [
-        ['democats.org', 'http://pool.democats.org:7603']
+        ['http://vig-pool.tyk.im', 'http://vig-pool.tyk.im:8119',
+          {
+            pool: {
+              host: 'vig-pool.tyk.im',
+              port: 8119
+            },
+            url: 'https://pools.vigcoin.org',
+            desc: '主矿池/旧矿池'
+          }
+        ],
+        ['http://pool-1.vigcoin.org', 'http://pool-1.vigcoin.org:8119', {
+          pool: {
+            host: 'pool-1.vigcoin.org',
+            port: 8119
+          },
+          url: 'http://pool-1.vigcoin.org:8119',
+          desc: '测试矿池'
+        }]
       ]
     }
   };
@@ -48,17 +76,76 @@ export class DataService {
   constructor(
     private http: HttpClient
   ) {
+    this.urls = this.config.networkStat.vig;
+    console.log(this.urls);
+    if (this.defaultIndex <= this.urls.length) {
+      this.currentPool = this.urls[this.defaultIndex];
+      this.currentAPI = this.currentPool[1];
+    }
+  }
+
+
+  getCurrentPool() {
+    return this.currentPool;
+  }
+
+  getCurrentUrl() {
+    return this.currentAPI;
+  }
+
+  getAdminStatus(password) {
+    const sub = this.get(this.currentAPI + '/admin_stats?password=' + password);
+    return sub;
+  }
+
+  getPayments(options) {
+    const sub = this.get(this.currentAPI + '/get_payments', options);
+    return sub;
   }
 
   getStatus() {
     if (this.status) {
       return of(this.status);
     }
-    this.get(this.config.api + '/stats').subscribe(data => {
+    const sub = this.get(this.currentAPI + '/stats');
+    sub.subscribe(data => {
       if (Object.keys(data).length > 0) {
         this.status = data;
       }
     });
+    return sub;
+  }
+
+  getLiveStatus() {
+    console.log('inside getStatus');
+    if (this.liveStatus) {
+      return of(this.liveStatus);
+    }
+    const sub = this.get(this.currentAPI + '/live_stats');
+    sub.subscribe(data => {
+      if (Object.keys(data).length > 0) {
+        this.liveStatus = data;
+      }
+    });
+    return sub;
+  }
+
+  getAddressStatus(options) {
+    console.log('inside getStatus');
+    if (this.addressStatus) {
+      return of(this.addressStatus);
+    }
+    const sub = this.get(this.currentAPI + '/stats_address', options);
+    sub.subscribe(data => {
+      if (Object.keys(data).length > 0) {
+        this.addressStatus = data;
+      }
+    });
+    return sub;
+  }
+
+  getBlocks(options) {
+    return this.get(this.currentAPI + '/get_blocks', options);
   }
 
   get(url, params?) {
@@ -156,6 +243,4 @@ export class DataService {
   getReadableHashRateString(hashrate) {
     return this.hashRateWithUnit(hashrate);
   }
-
- 
 }

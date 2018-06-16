@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { DataService } from '../data.service';
+import { interval } from 'rxjs/observable/interval';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +10,14 @@ import { DataService } from '../data.service';
 })
 export class HomeComponent implements OnInit {
   title = '田一块 VIG 矿池';
-  status
+  status?;
   public constructor(private dataService: DataService) {
   }
 
   ngOnInit() {
 
     // Initial Get status
-    this.dataService.get(this.dataService.config.api + '/stats').subscribe(data => {
+    this.dataService.getStatus().subscribe(data => {
       if (Object.keys(data).length > 0) {
         this.status = data;
         this.updateStatus();
@@ -24,9 +25,8 @@ export class HomeComponent implements OnInit {
     });
 
     // Periodical Get status
-    Observable.interval(this.dataService.config.interval || 10000).subscribe((v) => {
-      console.log("v = " + v);
-      this.dataService.get(this.dataService.config.api + '/live_stats').subscribe(data => {
+    interval(this.dataService.config.interval || 10000).subscribe((v) => {
+      this.dataService.getLiveStatus().subscribe(data => {
         if (Object.keys(data).length > 0) {
           this.status = data;
           this.updateStatus();
@@ -38,7 +38,9 @@ export class HomeComponent implements OnInit {
 
   updateStatus() {
     this.status.network.hashrate = this.status.network.difficulty / this.status.config.coinDifficultyTarget;
-    this.status.network.hashrateReadable = this.dataService.hashRateWithUnit(this.status.network.difficulty / this.status.config.coinDifficultyTarget);
+    this.status.network.hashrateReadable = this.dataService.hashRateWithUnit(
+      this.status.network.difficulty / this.status.config.coinDifficultyTarget
+    );
     this.status.network.lastBlockTime = this.dataService.timeAgo(this.status.network.timestamp);
     this.status.network.lastReward = this.dataService.getReadableCoins(this.status, this.status.network.reward, 4);
     this.status.network.lastHashExplorerUrl = this.dataService.hashToUrl(this.status, this.status.network.hash);

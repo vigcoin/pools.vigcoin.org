@@ -19,9 +19,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
     // Initial Get status
-    this.dataService.get(this.dataService.config.api + '/stats').subscribe(data => {
+    this.dataService.getStatus().subscribe(data => {
       if (Object.keys(data).length > 0) {
         this.status = data;
       }

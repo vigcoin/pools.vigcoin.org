@@ -5,24 +5,40 @@
 
   <h3>连接详情</h3>
   <div class="stats">
-    <div><i class="fa fa-cloud"></i> 矿池地址: <span id="miningPoolHost">{{config.poolHost}}</span></div>
+    <div>
+      <i class="fa fa-cloud"></i> 矿池服务器地址:
+      <span id="miningPoolHost">{{host}}</span>
+    </div>
   </div>
 
-  <h4>挖矿端口</h4>
+  <h3>矿池挖矿端口</h3>
   <div id="miningPorts" class="row">
-    <div class="stats" *ngFor="let port of status?.config.ports">
-      <div><i class="fa fa-tachometer"></i> 端口: <span class="miningPort">{{port.port}}</span></div>
-      <div><i class="fa fa-unlock-alt"></i> 开始难度: <span class="miningPortDiff">{{port.difficulty}}</span></div>
-      <div><i class="fa fa-question"></i> 描述: <span class="miningPortDesc">{{port.desc}}</span></div>
+    <div class="stats" *ngFor="let port of ports">
+      <div>
+        <i class="fa fa-tachometer"></i> 端口:
+        <span class="miningPort">{{port.port}}</span>
+      </div>
+      <div>
+        <i class="fa fa-unlock-alt"></i> 开始难度:
+        <span class="miningPortDiff">{{port.difficulty}}</span>
+      </div>
+      <div>
+        <i class="fa fa-question"></i> 描述:
+        <span class="miningPortDesc">{{port.desc}}</span>
+      </div>
     </div>
   </div>
 
   <hr>
 
-  <h3>对<i class="fa fa-windows"></i> Windows 新手矿工</h3>
+  <h3>对
+    <i class="fa fa-windows"></i> Windows 新手矿工</h3>
   <p class="getting_started_windows">
-    你可以<a class="btn btn-default btn-sm" href="{{config.easyminerDownload}}" target="_blank" id="easyminer_link"><i class="fa fa-download"></i>下载</a> 或者运行
-    <a target="_blank" href="https://github.com/zone117x/cryptonote-easy-miner">cryptonote-easy-miner</a> <i class="fa fa-github"></i>    (可以自动生成钱包地址)或者运行CPUMiner(需要正确配置参数)。
+    你可以
+    <a class="btn btn-default btn-sm" href="{{config.easyminerDownload}}" target="_blank" id="easyminer_link">
+      <i class="fa fa-download"></i>下载</a> 或者运行
+    <a target="_blank" href="https://github.com/zone117x/cryptonote-easy-miner">cryptonote-easy-miner</a>
+    <i class="fa fa-github"></i> (可以自动生成钱包地址)或者运行CPUMiner(需要正确配置参数)。
   </p>
 
   <hr>
@@ -32,20 +48,31 @@
     <table class="table">
       <thead>
         <tr>
-          <th><i class="fa fa-book"></i> 软件名</th>
-          <th><i class="fa fa-car"></i> 架构</th>
-          <th><i class="fa fa-download"></i> 下载</th>
-          <th><i class="fa fa-comments"></i> 讨论</th>
-          <th><i class="fa fa-file-code-o"></i> 源码</th>
+          <th>
+            <i class="fa fa-book"></i> 软件名</th>
+          <th>
+            <i class="fa fa-car"></i> 架构</th>
+          <th>
+            <i class="fa fa-download"></i> 下载</th>
+          <th>
+            <i class="fa fa-comments"></i> 讨论</th>
+          <th>
+            <i class="fa fa-file-code-o"></i> 源码</th>
         </tr>
       </thead>
       <tbody id="mining_apps">
         <tr>
           <td class="miningAppTitle">XMR-Stak-CPU (by fireice_uk)</td>
           <td>CPU</td>
-          <td><a target="_blank" href="https://github.com/fireice-uk/xmr-stak-cpu/releases">Github</a></td>
-          <td><a target="_blank" href="https://www.reddit.com/r/Monero/comments/5lsfgt/xmrstakcpu_high_performance_open_source_miner/">Reddit</a></td>
-          <td><a target="_blank" href="https://github.com/fireice-uk/xmr-stak-cpu">Github</a></td>
+          <td>
+            <a target="_blank" href="https://github.com/fireice-uk/xmr-stak-cpu/releases">Github</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://www.reddit.com/r/Monero/comments/5lsfgt/xmrstakcpu_high_performance_open_source_miner/">Reddit</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://github.com/fireice-uk/xmr-stak-cpu">Github</a>
+          </td>
         </tr>
         <tr>
           <td colspan="5">
@@ -57,9 +84,15 @@
         <tr>
           <td class="miningAppTitle">XMR-Stak-AMD (by fireice_uk)</td>
           <td>OpenCL (AMD)</td>
-          <td><a target="_blank" href="https://github.com/fireice-uk/xmr-stak-amd/releases">Github</a></td>
-          <td><a target="_blank" href="https://www.reddit.com/r/Monero/comments/5prg4a/xmrstakamd_released/">Reddit</a></td>
-          <td><a target="_blank" href="https://github.com/fireice-uk/xmr-stak-amd">Github</a></td>
+          <td>
+            <a target="_blank" href="https://github.com/fireice-uk/xmr-stak-amd/releases">Github</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://www.reddit.com/r/Monero/comments/5prg4a/xmrstakamd_released/">Reddit</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://github.com/fireice-uk/xmr-stak-amd">Github</a>
+          </td>
         </tr>
         <tr>
           <td colspan="5">
@@ -71,79 +104,115 @@
         <tr>
           <td class="miningAppTitle">CPUMiner (forked by LucasJones & Wolf)</td>
           <td>CPU</td>
-          <td><a target="_blank" href="https://github.com/lucasjones/cpuminer-multi/releases">Github</a></td>
-          <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=632724">BitcoinTalk</a></td>
-          <td><a target="_blank" href="https://github.com/lucasjones/cpuminer-multi">Github</a></td>
+          <td>
+            <a target="_blank" href="https://github.com/lucasjones/cpuminer-multi/releases">Github</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://bitcointalk.org/index.php?topic=632724">BitcoinTalk</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://github.com/lucasjones/cpuminer-multi">Github</a>
+          </td>
         </tr>
         <tr>
           <td colspan="5">
             <span>示例:</span>
-            <code>minerd -a cryptonight -o stratum+tcp://<span class="exampleHost">{{config.poolHost}}</span>:<span class="examplePort">{{config.poolPort}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
+            <code>minerd -a cryptonight -o stratum+tcp://<span class="exampleHost">{{host}}</span>:<span class="examplePort">{{port}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
           </td>
         </tr>
         <tr>
           <td class="miningAppTitle">YAM Miner (by yvg1900)</td>
           <td>CPU</td>
-          <td><a target="_blank" href="https://mega.co.nz/#F!h0tkXSxZ!f62uoUXogkxQmP2xO8Ib-g">MEGA</a></td>
-          <td><a target="_blank" href="https://twitter.com/yvg1900">Twitter</a></td>
-          <td>私有 <i class="fa fa-frown-o"></i></td>
+          <td>
+            <a target="_blank" href="https://mega.co.nz/#F!h0tkXSxZ!f62uoUXogkxQmP2xO8Ib-g">MEGA</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://twitter.com/yvg1900">Twitter</a>
+          </td>
+          <td>私有
+            <i class="fa fa-frown-o"></i>
+          </td>
         </tr>
         <tr>
           <td colspan="5">
             <span>示例:</span>
-            <code>yam -c x -M stratum+tcp://<span class="exampleAddress">YOUR_WALLET_ADDRESS</span>:x@<span class="exampleHost">{{config.poolHost}}</span>:<span class="examplePort">{{config.poolPort}}</span>/xmr</code>
+            <code>yam -c x -M stratum+tcp://<span class="exampleAddress">YOUR_WALLET_ADDRESS</span>:x@<span class="exampleHost">{{host}}</span>:<span class="examplePort">{{port}}</span>/xmr</code>
           </td>
         </tr>
         <tr>
           <td class="miningAppTitle">Claymore CPU Miner</td>
           <td>CPU</td>
-          <td><a target="_blank" href="https://mega.co.nz/#F!Hg4g1bLT!4Upg8GNiEZYCaZ04XVh_yg">MEGA</a></td>
-          <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=647251.0">BitcoinTalk</a></td>
-          <td>私有 <i class="fa fa-frown-o"></i></td>
+          <td>
+            <a target="_blank" href="https://mega.co.nz/#F!Hg4g1bLT!4Upg8GNiEZYCaZ04XVh_yg">MEGA</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://bitcointalk.org/index.php?topic=647251.0">BitcoinTalk</a>
+          </td>
+          <td>私有
+            <i class="fa fa-frown-o"></i>
+          </td>
         </tr>
         <tr>
           <td colspan="5">
             <span>示例:</span>
-            <code>NsCpuCNMiner64 -o stratum+tcp://<span class="exampleHost">{{config.poolHost}}</span>:<span class="examplePort">{{config.poolPort}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
+            <code>NsCpuCNMiner64 -o stratum+tcp://<span class="exampleHost">{{host}}</span>:<span class="examplePort">{{port}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
           </td>
         </tr>
         <tr>
           <td class="miningAppTitle">Claymore GPU Miner</td>
           <td>OpenCL (AMD)</td>
-          <td><a target="_blank" href="https://mega.co.nz/#F!e4JVEAIJ!l1iF4z10fMyJzY5-LnyC2A">MEGA</a></td>
-          <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=638915.0">Discussion</a></td>
-          <td>私有 <i class="fa fa-frown-o"></i></td>
+          <td>
+            <a target="_blank" href="https://mega.co.nz/#F!e4JVEAIJ!l1iF4z10fMyJzY5-LnyC2A">MEGA</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://bitcointalk.org/index.php?topic=638915.0">Discussion</a>
+          </td>
+          <td>私有
+            <i class="fa fa-frown-o"></i>
+          </td>
         </tr>
         <tr>
           <td colspan="5">
             <span>示例:</span>
-            <code>NsGpuCNMiner -o stratum+tcp://<span class="exampleHost">{{config.poolHost}}</span>:<span class="examplePort">{{config.poolPort}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
+            <code>NsGpuCNMiner -o stratum+tcp://<span class="exampleHost">{{host}}</span>:<span class="examplePort">{{port}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
           </td>
         </tr>
         <tr>
           <td class="miningAppTitle">ccminer (forked by tsiv)</td>
           <td>CUDA (Nvidia)</td>
-          <td><a target="_blank" href="https://github.com/tsiv/ccminer-cryptonight/releases">Github</a></td>
-          <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=656841.msg7487737#msg7487737">BitcoinTalk</a></td>
-          <td><a target="_blank" href="https://github.com/tsiv/ccminer-cryptonight">Github</a></td>
+          <td>
+            <a target="_blank" href="https://github.com/tsiv/ccminer-cryptonight/releases">Github</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://bitcointalk.org/index.php?topic=656841.msg7487737#msg7487737">BitcoinTalk</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://github.com/tsiv/ccminer-cryptonight">Github</a>
+          </td>
         </tr>
         <tr>
           <td colspan="5">
             <span>示例:</span>
-            <code>ccminer -o stratum+tcp://<span class="exampleHost">{{config.poolHost}}</span>:<span class="examplePort">{{config.poolPort}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
+            <code>ccminer -o stratum+tcp://<span class="exampleHost">{{host}}</span>:<span class="examplePort">{{port}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
           </td>
         </tr>
         <tr>
           <td class="miningAppTitle">xmrMiner</td>
           <td>CUDA (Nvidia)</td>
-          <td><a target="_blank" href="https://github.com/xmrMiner/xmrMiner-Win64">Github</a></td>
-          <td><a target="_blank" href="https://forum.getmonero.org/13/mining-software-and-pools/87576/xmrminer-a-new-high-optimized-nvidia-gpu-miner">Forum</a></td>
-          <td><a target="_blank" href="https://github.com/xmrMiner/xmrMiner">Github</a></td>
+          <td>
+            <a target="_blank" href="https://github.com/xmrMiner/xmrMiner-Win64">Github</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://forum.getmonero.org/13/mining-software-and-pools/87576/xmrminer-a-new-high-optimized-nvidia-gpu-miner">Forum</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://github.com/xmrMiner/xmrMiner">Github</a>
+          </td>
         </tr>
         <tr>
           <td colspan="5">
             <span>示例:</span>
-            <code>xmrMiner_0.2.0.exe --url=stratum+tcp://<span class="exampleHost">{{config.poolHost}}</span>:<span class="examplePort">{{config.poolPort}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x --bfactor=8 --bsleep=100</code>
+            <code>xmrMiner_0.2.0.exe --url=stratum+tcp://<span class="exampleHost">{{host}}</span>:<span class="examplePort">{{port}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x --bfactor=8 --bsleep=100</code>
           </td>
         </tr>
       </tbody>

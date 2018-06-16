@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 declare var jquery: any;
 declare var $: any;
 
@@ -7,7 +7,7 @@ declare var $: any;
   templateUrl: './status.component.html',
   styleUrls: ['./status.component.css']
 })
-export class StatusComponent implements OnInit {
+export class StatusComponent implements OnInit, OnChanges {
 
   @Input('status') data;
 
@@ -16,25 +16,25 @@ export class StatusComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("inside status");
+    console.log('inside status');
     console.log(this.data);
   }
 
   ngOnChanges() {
-    console.log("inside status change");
+    console.log('inside status change');
     console.log(this.data);
     if (this.data && Object.keys(this.data).length > 0) {
       this.createCharts(this.data);
     }
   }
 
-  getGraphData(rawData, fixValueToCoins = undefined) {
-    var graphData = {
+  getGraphData(rawData, fixValueToCoins?) {
+    const graphData = {
       names: [],
       values: []
     };
     if (rawData) {
-      for (var i = 0, xy; xy = rawData[i]; i++) {
+      for (let i = 0, xy; xy = rawData[i]; i++) {
         graphData.names.push(new Date(xy[0] * 1000).toLocaleString());
         graphData.values.push(fixValueToCoins ? this.getReadableCoins(xy[1], 4, true) : xy[1]);
       }
@@ -43,12 +43,13 @@ export class StatusComponent implements OnInit {
   }
 
   getReadableCoins(coins, digits, withoutSymbol = null) {
-    var amount = (parseInt(coins || 0) / this.data.config.coinUnits).toFixed(digits || this.data.config.coinUnits.toString().length - 1);
+    const amount = (parseInt(coins || 0, 10) / this.data.config.coinUnits)
+      .toFixed(digits || this.data.config.coinUnits.toString().length - 1);
     return amount + (withoutSymbol ? '' : (' ' + this.data.config.symbol));
   }
-  
+
   createCharts(data) {
-    let currencyGraphStat = {
+    const currencyGraphStat = {
       type: 'line',
       width: '100%',
       height: '75',
@@ -63,8 +64,8 @@ export class StatusComponent implements OnInit {
       drawNormalOnTop: false,
       tooltipFormat: '<p style="margin-right:10px">{{y}} , {{offset:names}}</p>'
     };
-    if (data.hasOwnProperty("charts")) {
-      var graphData = {
+    if (data.hasOwnProperty('charts')) {
+      const graphData = {
         profit: this.getGraphData(data.charts.profit),
         diff: this.getGraphData(data.charts.difficulty),
         hashrate: this.getGraphData(data.charts.hashrate),
@@ -72,11 +73,11 @@ export class StatusComponent implements OnInit {
         workers: this.getGraphData(data.charts.workers)
       };
 
-      for (var graphType in graphData) {
+      for (const graphType in graphData) {
         if (graphData[graphType].values.length > 1) {
-          var settings: any = currencyGraphStat;
+          const settings: any = currencyGraphStat;
           settings.tooltipValueLookups = { names: graphData[graphType].names };
-          var $chart = $('[data-chart=' + graphType + '] .chart');
+          const $chart = $('[data-chart=' + graphType + '] .chart');
           $chart.closest('.chartWrap').show();
           $chart.sparkline(graphData[graphType].values, settings);
         }

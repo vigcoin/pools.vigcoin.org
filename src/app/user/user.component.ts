@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
+import { interval } from 'rxjs/observable/interval';
+
 declare const $: any;
 
 @Injectable()
@@ -71,7 +73,7 @@ export class UserComponent implements OnInit {
       this.getAddressStatus(this.address);
     }
     // Periodical Get Address Info
-    Observable.interval(this.dataService.config.interval || 10000).subscribe((v) => {
+    interval(this.dataService.config.interval || 10000).subscribe((v) => {
       console.log('v = ' + v);
       if (this.address) {
         this.getAddressStatus(this.address);
@@ -90,7 +92,7 @@ export class UserComponent implements OnInit {
   getAddressStatus(address) {
     this.docCookies.setItem('mining_address', address, Infinity);
     this.query = true;
-    this.dataService.get(this.dataService.config.api + '/stats_address', { address: this.address, longpoll: false }).subscribe(data => {
+    this.dataService.getAddressStatus({ address: this.address, longpoll: false }).subscribe(data => {
       this.query = false;
       console.log(data);
       if (data && !data['error'] && Object.keys(data).length > 0) {
@@ -240,17 +242,16 @@ export class UserComponent implements OnInit {
   }
 
   loadMore() {
-    this.dataService.get(this.dataService.config.api + '/get_payments',
-      {
-        address: this.address,
-        time: $('#payments_rows').children().last().data('time')
-      }).subscribe(data => {
-        if (Object.keys(data).length > 0) {
-          this.renderPayments(data);
-        } else {
-          $('#loadMorePayments').text('没有更多的数据了!').prop('disabled', true);
-        }
-      });
+    this.dataService.getPayments({
+      address: this.address,
+      time: $('#payments_rows').children().last().data('time')
+    }).subscribe(data => {
+      if (Object.keys(data).length > 0) {
+        this.renderPayments(data);
+      } else {
+        $('#loadMorePayments').text('没有更多的数据了!').prop('disabled', true);
+      }
+    });
   }
 
 
