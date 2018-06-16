@@ -29,7 +29,7 @@ export class NetworksComponent implements OnInit {
 
   calculateTotalFee(config) {
     let totalFee = config.config.fee;
-    for (let property in config.config.donation) {
+    for (const property in config.config.donation) {
       if (config.config.donation.hasOwnProperty(property)) {
         totalFee += config.config.donation[property];
       }
@@ -38,18 +38,22 @@ export class NetworksComponent implements OnInit {
   }
 
   init() {
-    var curHost = location.host; 
+    const curHost = location.host;
     const NETWORK_STAT_MAP = new Map(this.dataService.config.networkStat[this.status.config.symbol.toLowerCase()]);
     NETWORK_STAT_MAP.forEach((url, host, map) => {
       $.getJSON(url + '/stats', (data, textStatus, jqXHR) => {
-	    var isCurHost = host.toString().indexOf(curHost)>=0;
+        const isCurHost = host.toString().indexOf(curHost) >= 0;
         $('#network_rows').append('<tr>' +
-          '<td id=host-' + host + '><a target=blank href=http://' + host + '>' + (isCurHost ? ('<code>' + host + '</code>') : host) + '</a> (' + data.config.symbol + ')</td>' +
+          '<td id=host-' + host + '><a target=blank href=http://'
+          + host + '>' + (isCurHost ? ('<code>' + host + '</code>') : host)
+          + '</a> (' + data.config.symbol + ')</td>' +
           '<td id=height-' + host + '>' + data.network.height + '</td>' +
           '<td id=hashrate-' + host + '>' + data.pool.hashrate + '&nbsp;H/s</td>' +
           '<td id=miners-' + host + '>' + data.pool.miners + '</td>' +
           '<td id=totalFee-' + host + '>' + this.calculateTotalFee(data) + '%</td>' +
-          '<td id=lastBlockFound-' + host + '>' + new Date(parseInt(data.pool.lastBlockFound)).toLocaleString() + '</td>' +
+          '<td id=lastBlockFound-' + host + '>' +
+          (data.pool.lastBlockFound ? new Date(parseInt(data.pool.lastBlockFound, 10)).toLocaleString()
+          : '尚未出块') + '</td>' +
           '</tr>');
       });
     });
