@@ -90,7 +90,7 @@ export class DataService {
   }
 
   selectPool(i) {
-    this.defaultIndex = i;
+    this.defaultIndex = i || 0;
     if (this.defaultIndex > this.pools.length) {
       this.defaultIndex = 0;
     }
