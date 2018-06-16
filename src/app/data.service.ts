@@ -18,7 +18,7 @@ export class DataService {
   /**
    * Pool urls
    */
-  urls;
+  pools;
 
   defaultIndex = 0;
   currentPool;
@@ -73,17 +73,37 @@ export class DataService {
     }
   };
 
+  storageIndexName = 'pool-index';
+
   constructor(
     private http: HttpClient
   ) {
-    this.urls = this.config.networkStat.vig;
-    console.log(this.urls);
-    if (this.defaultIndex <= this.urls.length) {
-      this.currentPool = this.urls[this.defaultIndex];
-      this.currentAPI = this.currentPool[1];
+    this.pools = this.config.networkStat.vig;
+    try {
+      this.defaultIndex = parseInt(localStorage.getItem(this.storageIndexName), 10);
+    } catch (e) {
+      console.log(e);
+      this.defaultIndex = 0;
     }
+    this.selectPool(this.defaultIndex);
   }
 
+  selectPool(i) {
+    this.defaultIndex = i;
+    if (this.defaultIndex > this.pools.length) {
+      this.defaultIndex = 0;
+    }
+    localStorage.setItem(this.storageIndexName, String(this.defaultIndex));
+    if (this.pools.length <= 0) {
+      return;
+    }
+    this.currentPool = this.pools[this.defaultIndex];
+    this.currentAPI = this.currentPool[1];
+  }
+
+  getPools() {
+    return this.pools;
+  }
 
   getCurrentPool() {
     return this.currentPool;

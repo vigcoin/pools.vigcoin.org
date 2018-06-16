@@ -1,6 +1,10 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+
+import { DataService } from '../data.service';
+
 declare var jquery: any;
 declare var $: any;
+
 
 @Component({
   selector: 'app-status',
@@ -11,13 +15,20 @@ export class StatusComponent implements OnInit, OnChanges {
 
   @Input('status') data;
 
-  constructor() {
+  pools;
+  currentPool;
+
+  constructor(private dataService: DataService, ) {
 
   }
 
   ngOnInit() {
     console.log('inside status');
     console.log(this.data);
+    this.pools = this.dataService.getPools();
+    if (this.pools.length) {
+      this.currentPool = this.pools[0];
+    }
   }
 
   ngOnChanges() {
@@ -83,5 +94,10 @@ export class StatusComponent implements OnInit, OnChanges {
         }
       }
     }
+  }
+
+  onClick(index) {
+    this.dataService.selectPool(index);
+    window.location.reload();
   }
 }

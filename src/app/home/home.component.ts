@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit {
         if (Object.keys(data).length > 0) {
           this.status = data;
           this.updateStatus();
-
         }
       });
     });

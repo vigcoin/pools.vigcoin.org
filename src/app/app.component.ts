@@ -13,7 +13,8 @@ import { Observable } from 'rxjs/Observable';
 export class AppComponent implements OnInit {
   title = '田一块 VIG 矿池';
   status;
-  public constructor(private titleService: Title, private meta: Meta, private dataService: DataService, private router: Router) {
+  public constructor(private titleService: Title, private meta: Meta,
+     private dataService: DataService, private router: Router) {
     this.titleService.setTitle(this.title);
     this.meta.addTag({ name: 'keywords', content: 'VIG,矿池,BITCOIN,比特币' });
   }
