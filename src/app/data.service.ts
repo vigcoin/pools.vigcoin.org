@@ -10,8 +10,8 @@ export class DataService {
   status;
   config: any = {
     // api: 'http://localhost:8119',
-    // api: 'http://vig-pool.tyk.im:8119',
-    api: 'http://pool-1.vigcoin.org:8119',
+    api: 'http://vig-pool.tyk.im:8119',
+    // api: 'http://pool-1.vigcoin.org:8119',
     api_blockexplorer: 'http://vig-pool.tyk.im:19810',
 
     poolHost: 'vig-pool.tyk.im',
