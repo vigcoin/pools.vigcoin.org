@@ -13,10 +13,17 @@ export class MonitoringComponent implements OnInit {
   status;
   monitoringDaemon;
   monitoringWallet;
+  pools;
+  currentPool;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+	this.pools = this.dataService.getPools();
+    if (this.pools.length) {
+      this.currentPool = this.dataService.getCurrentPool();
+    }
+	
     this.config = this.dataService.config;
 
     this.dataService.getStatus().subscribe(data => {
@@ -66,12 +73,13 @@ export class MonitoringComponent implements OnInit {
 
   renderLogInfo() {
 
-    $.getJSON(this.dataService.config.api + '/admin_monitoring?password=' + this.getCookiesItem('password'), (data, textStatus, jqXHR) => {
-      this.monitoringInfoParse(data);
-      $('#daemonStatus').addClass(data['monitoring'].daemon.lastStatus === 'ok' ? 'text-success' : 'text-danger');
-      $('#walletStatus').addClass(data['monitoring'].wallet.lastStatus === 'ok' ? 'text-success' : 'text-danger');
+	let url = 'http://' + this.currentPool[2].pool.host + ':' + this.currentPool[2].pool.port;
+	 $.getJSON(url + '/admin_monitoring?password=' + this.getCookiesItem('password'), (data, textStatus, jqXHR) => {
+	    this.monitoringInfoParse(data);
+	    $('#daemonStatus').addClass(data['monitoring'].daemon.lastStatus === 'ok' ? 'text-success' : 'text-danger');
+	    $('#walletStatus').addClass(data['monitoring'].wallet.lastStatus === 'ok' ? 'text-success' : 'text-danger');
+	 });
 
-    });
   }
 
   getCookiesItem(key) {
