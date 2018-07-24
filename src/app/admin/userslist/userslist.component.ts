@@ -9,19 +9,15 @@ declare var $: any;
 })
 export class UserslistComponent implements OnInit {
 
-  pools;
-  currentPool;
   config;
   status;
-  
+  currentPool;
+	
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-	this.pools = this.dataService.getPools();
-    if (this.pools.length) {
-      this.currentPool = this.dataService.getCurrentPool();
-    }
-	
+
+    this.currentPool = this.dataService.getCurrentPool();
 	
     this.config = this.dataService.config;
 
