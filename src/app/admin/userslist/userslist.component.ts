@@ -9,12 +9,20 @@ declare var $: any;
 })
 export class UserslistComponent implements OnInit {
 
+  pools;
+  currentPool;
   config;
   status;
-
+  
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+	this.pools = this.dataService.getPools();
+    if (this.pools.length) {
+      this.currentPool = this.dataService.getCurrentPool();
+    }
+	
+	
     this.config = this.dataService.config;
 
     this.dataService.getStatus().subscribe(data => {
@@ -27,9 +35,9 @@ export class UserslistComponent implements OnInit {
 
   init() {
 
-
-    const USER_LIST_MAP = new Map(this.dataService.config.networkStat[this.status.config.symbol.toLowerCase()]);
-    USER_LIST_MAP.forEach((url, host, map) => {
+	const url = 'http://' + this.currentPool[2].pool.host + ':' + this.currentPool[2].pool.port;
+	const host = this.currentPool[2].pool.host;
+  
       $.getJSON(url + '/admin_users?password=' + this.getCookiesItem('password'), (data, textStatus, jqXHR) => {
         data = this.parseUsers(data);
         for (let i = 0; i < data.length; i += 1) {
@@ -44,8 +52,6 @@ export class UserslistComponent implements OnInit {
         }
       });
 
-
-    });
   }
 
   parseUsers(wallets) {
