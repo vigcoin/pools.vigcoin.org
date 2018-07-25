@@ -7,12 +7,19 @@
           (change)="calcEstimateProfit()" (keyup)="calcEstimateProfit()">
         <div class="input-group-btn">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="calcHashDropdown">
-            <span id="calcHashUnit" data-mul="1">{{text}}</span> <span class="caret"></span>
+            <span id="calcHashUnit" data-mul="1">{{text}}</span>
+            <span class="caret"></span>
           </button>
           <ul class="dropdown-menu dropdown-menu-right" role="menu" id="calcHashUnits">
-            <li><a href="#" data-mul="0" (click)="changeUnits('H/s', 0)">H/s</a></li>
-            <li><a href="#" data-mul="1" (click)="changeUnits('KH/s', 1)">KH/s</a></li>
-            <li><a href="#" data-mul="2" (click)="changeUnits('MH/s', 2)">MH/s</a></li>
+            <li>
+              <a href="#" data-mul="0" (click)="changeUnits('H/s', 0)">H/s</a>
+            </li>
+            <li>
+              <a href="#" data-mul="1" (click)="changeUnits('KH/s', 1)">KH/s</a>
+            </li>
+            <li>
+              <a href="#" data-mul="2" (click)="changeUnits('MH/s', 2)">MH/s</a>
+            </li>
           </ul>
         </div>
         <span class="input-group-addon" id="calcHashResultsHolder">{{amount}} {{symbol}} / 天</span>

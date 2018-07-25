@@ -7,11 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CaculatorComponent implements OnInit {
   @Input('status') data;
-  amount = '0'
-  text = 'KH'
-  unit = 1
-  hashrate
-  symbol = 'VIG'
+  amount = '0';
+  text = 'KH';
+  unit = 1;
+  hashrate;
+  symbol = 'VIG';
   constructor() { }
 
   ngOnInit() {
@@ -19,7 +19,7 @@ export class CaculatorComponent implements OnInit {
 
   ngOnChanges() {
     if (this.data) {
-      this.symbol = this.data.config.symbol
+      this.symbol = this.data.config.symbol;
     }
   }
 

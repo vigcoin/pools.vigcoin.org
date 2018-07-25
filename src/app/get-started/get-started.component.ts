@@ -10,9 +10,9 @@ declare var $: any;
 })
 
 export class GetStartedComponent implements OnInit {
-  status
-  config
-  ports
+  status;
+  config;
+  ports;
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
@@ -24,4 +24,4 @@ export class GetStartedComponent implements OnInit {
       }
     });
   }
-};
+}
