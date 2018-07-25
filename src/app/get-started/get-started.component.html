@@ -1,16 +1,28 @@
+<app-navigator [status]="status">
+</app-navigator>
+
 <div class="container">
 
   <h3>连接详情</h3>
   <div class="stats">
     <div>
+<<<<<<< HEAD
       <i class="fa fa-cloud"></i> 矿池地址:
       <span id="miningPoolHost">{{config.poolHost}}</span>
+=======
+      <i class="fa fa-cloud"></i> 矿池服务器地址:
+      <span id="miningPoolHost">{{host}}</span>
+>>>>>>> upstream/master
     </div>
   </div>
 
-  <h4>挖矿端口</h4>
+  <h3>矿池挖矿端口</h3>
   <div id="miningPorts" class="row">
+<<<<<<< HEAD
     <div class="stats" *ngFor="let port of status?.config.ports">
+=======
+    <div class="stats" *ngFor="let port of ports">
+>>>>>>> upstream/master
       <div>
         <i class="fa fa-tachometer"></i> 端口:
         <span class="miningPort">{{port.port}}</span>
@@ -119,7 +131,7 @@
         <tr>
           <td colspan="5">
             <span>示例:</span>
-            <code>minerd -a cryptonight -o stratum+tcp://<span class="exampleHost">{{config.poolHost}}</span>:<span class="examplePort">{{config.poolPort}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
+            <code>minerd -a cryptonight -o stratum+tcp://<span class="exampleHost">{{host}}</span>:<span class="examplePort">{{port}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
           </td>
         </tr>
         <tr>
@@ -138,7 +150,7 @@
         <tr>
           <td colspan="5">
             <span>示例:</span>
-            <code>yam -c x -M stratum+tcp://<span class="exampleAddress">YOUR_WALLET_ADDRESS</span>:x@<span class="exampleHost">{{config.poolHost}}</span>:<span class="examplePort">{{config.poolPort}}</span>/xmr</code>
+            <code>yam -c x -M stratum+tcp://<span class="exampleAddress">YOUR_WALLET_ADDRESS</span>:x@<span class="exampleHost">{{host}}</span>:<span class="examplePort">{{port}}</span>/xmr</code>
           </td>
         </tr>
         <tr>
@@ -157,7 +169,7 @@
         <tr>
           <td colspan="5">
             <span>示例:</span>
-            <code>NsCpuCNMiner64 -o stratum+tcp://<span class="exampleHost">{{config.poolHost}}</span>:<span class="examplePort">{{config.poolPort}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
+            <code>NsCpuCNMiner64 -o stratum+tcp://<span class="exampleHost">{{host}}</span>:<span class="examplePort">{{port}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
           </td>
         </tr>
         <tr>
@@ -176,7 +188,7 @@
         <tr>
           <td colspan="5">
             <span>示例:</span>
-            <code>NsGpuCNMiner -o stratum+tcp://<span class="exampleHost">{{config.poolHost}}</span>:<span class="examplePort">{{config.poolPort}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
+            <code>NsGpuCNMiner -o stratum+tcp://<span class="exampleHost">{{host}}</span>:<span class="examplePort">{{port}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
           </td>
         </tr>
         <tr>
@@ -195,7 +207,7 @@
         <tr>
           <td colspan="5">
             <span>示例:</span>
-            <code>ccminer -o stratum+tcp://<span class="exampleHost">{{config.poolHost}}</span>:<span class="examplePort">{{config.poolPort}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
+            <code>ccminer -o stratum+tcp://<span class="exampleHost">{{host}}</span>:<span class="examplePort">{{port}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
           </td>
         </tr>
         <tr>
@@ -214,7 +226,7 @@
         <tr>
           <td colspan="5">
             <span>示例:</span>
-            <code>xmrMiner_0.2.0.exe --url=stratum+tcp://<span class="exampleHost">{{config.poolHost}}</span>:<span class="examplePort">{{config.poolPort}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x --bfactor=8 --bsleep=100</code>
+            <code>xmrMiner_0.2.0.exe --url=stratum+tcp://<span class="exampleHost">{{host}}</span>:<span class="examplePort">{{port}}</span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x --bfactor=8 --bsleep=100</code>
           </td>
         </tr>
       </tbody>

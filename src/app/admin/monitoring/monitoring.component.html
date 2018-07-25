@@ -1,0 +1,77 @@
+<app-admin-navigator [status]="status">
+</app-admin-navigator>
+
+<div class="adminMonitor">
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div id="monitoringInfoView"></div>
+		<div class="tab-pane active" id="rpcLog">
+			<div class="row">
+				<div class="col-sm-6">
+					<h3>守护进程</h3>
+					<ul class="list-unstyled">
+						<li>
+							<strong>最后检查:</strong>
+							{{monitoringDaemon?.lastCheck}}
+						</li>
+						<li>
+							<strong>最后状态:</strong>
+							<span id="daemonStatus">{{monitoringDaemon?.lastStatus}}</span>
+						</li>
+						<li>
+							<strong>最后响应:</strong>
+							<pre>{{monitoringDaemon?.lastResponse}}</pre>
+						</li>
+						<li>
+							<strong>最后失败:</strong>
+							<span>{{monitoringDaemon?.lastFail}}</span>
+						</li>
+						<li>
+							<strong>最后失败响应:</strong>
+							<pre>{{monitoringDaemon?.lastFailResponse}}</pre>
+						</li>
+					</ul>
+				</div>
+				<div class="col-sm-6">
+					<h3>钱包</h3>
+					<ul class="list-unstyled">
+						<li>
+							<strong>最后检查:</strong>
+							{{monitoringWallet?.lastCheck}}
+						</li>
+						<li>
+							<strong>最后状态:</strong>
+							<span id="walletStatus">{{monitoringWallet?.lastStatus}}</span>
+						</li>
+						<li>
+							<strong>最后响应:</strong>
+							<pre>{{monitoringWallet?.lastResponse}}</pre>
+						</li>
+						<li>
+							<strong>最后失败:</strong>
+							<span>{{monitoringWallet?.lastFail}}</span>
+						</li>
+						<li>
+							<strong>最后失败响应:</strong>
+							<pre>{{monitoringWallet?.lastFailResponse}}</pre>
+					</ul>
+				</div>
+			</div>
+
+			<h3>日志</h3>
+
+			<table class="table table-hover table-striped logList" id="logTable">
+				<thead>
+					<tr>
+						<th class="sort">名称</th>
+						<th class="sort">修改时间</th>
+						<th class="sort">大小</th>
+					</tr>
+				</thead>
+				<tbody id="log_rows">
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</div>

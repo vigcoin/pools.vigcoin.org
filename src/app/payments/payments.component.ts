@@ -8,26 +8,27 @@ declare var $: any;
   styleUrls: ['./payments.component.css']
 })
 export class PaymentsComponent implements OnInit {
-  config
-  status
+  config?;
+  status?;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.config = this.dataService.config;
-    this.dataService.get(this.config.api + '/stats').subscribe(data => {
+    this.dataService.getStatus().subscribe(data => {
       if (Object.keys(data).length > 0) {
         this.status = data;
-        this.status.config.minPaymentThresholdText = this.dataService.getReadableCoins(this.status, this.status.config.minPaymentThreshold, 2);
-        this.status.config.denominationUnitText = this.dataService.getReadableCoins(this.status, this.status.config.denominationUnit, 2);
-
+        this.status.config.minPaymentThresholdText =
+          this.dataService.getReadableCoins(this.status, this.status.config.minPaymentThreshold, 2);
+        this.status.config.denominationUnitText =
+          this.dataService.getReadableCoins(this.status, this.status.config.denominationUnit, 2);
         this.renderPayments(this.status.pool.payments);
       }
     });
   }
 
   getMore() {
-    this.dataService.get(this.dataService.config.api + '/get_payments', {
+    this.dataService.getPayments({
       time: $('#payments_rows').children().last().data('time')
     }).subscribe(data => {
       if (Object.keys(data).length > 0) {
@@ -51,7 +52,7 @@ export class PaymentsComponent implements OnInit {
 
   getPaymentRowElement(payment, jsonString) {
 
-    var row = document.createElement('tr');
+    const row = document.createElement('tr');
     row.setAttribute('data-json', jsonString);
     row.setAttribute('data-time', payment.time);
     row.setAttribute('id', 'paymentRow' + payment.time);
@@ -62,9 +63,9 @@ export class PaymentsComponent implements OnInit {
   }
 
   parsePayment(time, serializedPayment) {
-    var parts = serializedPayment.split(':');
+    const parts = serializedPayment.split(':');
     return {
-      time: parseInt(time),
+      time: parseInt(time, 10),
       hash: parts[0],
       amount: parts[1],
       fee: parts[2],
@@ -75,35 +76,35 @@ export class PaymentsComponent implements OnInit {
 
   renderPayments(paymentsResults) {
 
-    var $paymentsRows = $('#payments_rows');
+    const $paymentsRows = $('#payments_rows');
 
-    for (var i = 0; i < paymentsResults.length; i += 2) {
+    for (let i = 0; i < paymentsResults.length; i += 2) {
 
-      var payment = this.parsePayment(paymentsResults[i + 1], paymentsResults[i]);
+      const payment = this.parsePayment(paymentsResults[i + 1], paymentsResults[i]);
 
-      var paymentJson = JSON.stringify(payment);
+      const paymentJson = JSON.stringify(payment);
 
-      var existingRow = document.getElementById('paymentRow' + payment.time);
+      const existingRow = document.getElementById('paymentRow' + payment.time);
 
       if (existingRow && existingRow.getAttribute('data-json') !== paymentJson) {
         $(existingRow).replaceWith(this.getPaymentRowElement(payment, paymentJson));
-      }
-      else if (!existingRow) {
+      } else if (!existingRow) {
 
-        var paymentElement = this.getPaymentRowElement(payment, paymentJson);
+        const paymentElement = this.getPaymentRowElement(payment, paymentJson);
 
-        var inserted = false;
-        var rows = $paymentsRows.children().get();
-        for (var f = 0; f < rows.length; f++) {
-          var pTime = parseInt(rows[f].getAttribute('data-time'));
+        let inserted = false;
+        const rows = $paymentsRows.children().get();
+        for (let f = 0; f < rows.length; f++) {
+          const pTime = parseInt(rows[f].getAttribute('data-time'), 10);
           if (pTime < payment.time) {
             inserted = true;
             $(rows[f]).before(paymentElement);
             break;
           }
         }
-        if (!inserted)
+        if (!inserted) {
           $paymentsRows.append(paymentElement);
+        }
       }
 
     }

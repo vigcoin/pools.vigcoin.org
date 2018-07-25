@@ -5,10 +5,13 @@
 
     <div class="input-group">
       <input class="form-control" id="yourStatsInput" type="text" [(ngModel)]="address" (change)="onAddressChange()" placeholder="输入你的钱包地址">
-      <span class="input-group-btn"><button class="btn btn-default" type="button" id="lookUp">
-            <span (click)="query()" *ngIf="!query"><i class="fa fa-search"></i> 查询</span>
-      <span *ngIf="query"><i class="fa fa-refresh fa-spin"></i> 搜索...</span>
-      </button>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" id="lookUp">
+          <span (click)="queryAddress()" *ngIf="!isQuery">
+            <i class="fa fa-search"></i> 查询</span>
+          <span *ngIf="isQuery">
+            <i class="fa fa-refresh fa-spin"></i> 搜索...</span>
+        </button>
       </span>
     </div>
   </div>
@@ -19,11 +22,26 @@
   <div class="col-sm-4 stats">
     <div id="addressError"></div>
     <!-- <div class="yourStats"><i class="fa fa-key"></i> Address: <span id="yourAddressDisplay"></span></div> -->
-    <div class="yourStats"><i class="fa fa-bank"></i> 未支付: <span id="yourPendingBalance">{{status?.stats.balanceText}}</span></div>
-    <div class="yourStats"><i class="fa fa-money"></i> 全部已支付: <span id="yourPaid">{{status?.stats.paidText}}</span></div>
-    <div class="yourStats"><i class="fa fa-clock-o"></i> 最后提交分额: <span id="yourLastShare">{{status?.stats.lastShareTime}}</span></div>
-    <div class="yourStats"><i class="fa fa-tachometer"></i> 算力: <span id="yourHashrateHolder">{{status?.stats.hashrate}} / 秒</span></div>
-    <div class="yourStats"><i class="fa fa-cloud-upload"></i> 总哈希提交: <span id="yourHashes">{{status?.stats.hashes}}</span></div>
+    <div class="yourStats">
+      <i class="fa fa-bank"></i> 未支付:
+      <span id="yourPendingBalance">{{status?.stats?.balanceText || "0.0"}}</span>
+    </div>
+    <div class="yourStats">
+      <i class="fa fa-money"></i> 全部已支付:
+      <span id="yourPaid">{{status?.stats?.paidText || "0.0"}}</span>
+    </div>
+    <div class="yourStats">
+      <i class="fa fa-clock-o"></i> 最后提交分额:
+      <span id="yourLastShare">{{status?.stats?.lastShareTime || "0.0"}}</span>
+    </div>
+    <div class="yourStats">
+      <i class="fa fa-tachometer"></i> 算力:
+      <span id="yourHashrateHolder">{{status?.stats?.hashrate || "0.0"}} / 秒</span>
+    </div>
+    <div class="yourStats">
+      <i class="fa fa-cloud-upload"></i> 总哈希提交:
+      <span id="yourHashes">{{status?.stats?.hashes || "0"}}</span>
+    </div>
   </div>
   <div class="col-sm-4">
     <div class="userChart" data-chart="user_hashrate">
@@ -50,10 +68,14 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th><i class="fa fa-clock-o"></i> 发送时间</th>
-          <th><i class="fa fa-paw"></i> 交易哈希</th>
-          <th><i class="fa fa-money"></i> 数量</th>
-          <th><i class="fa fa-sitemap"></i> 合并</th>
+          <th>
+            <i class="fa fa-clock-o"></i> 发送时间</th>
+          <th>
+            <i class="fa fa-paw"></i> 交易哈希</th>
+          <th>
+            <i class="fa fa-money"></i> 数量</th>
+          <th>
+            <i class="fa fa-sitemap"></i> 合并</th>
         </tr>
       </thead>
       <tbody id="payments_rows">
