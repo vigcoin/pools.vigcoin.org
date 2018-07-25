@@ -10,17 +10,11 @@ declare var $: any;
 })
 
 export class GetStartedComponent implements OnInit {
-<<<<<<< HEAD
-  status;
-  config;
-  ports;
-=======
   status?;
   config?;
   ports?;
   host?;
   port?;
->>>>>>> upstream/master
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
