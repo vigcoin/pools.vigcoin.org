@@ -200,7 +200,7 @@ export class UserComponent implements OnInit {
         spotRadius: 3,
         drawNormalOnTop: false,
         chartRangeMin: 0,
-        tooltipFormat: '<b>{{y}}</b>, {{offset:names}}'
+        tooltipFormat: '<p style="margin-right:10px">{{y}} , {{offset:names}}</p>'
       },
       payments: {
         type: 'line',
@@ -215,7 +215,7 @@ export class UserComponent implements OnInit {
         spotRadius: 3,
         drawNormalOnTop: false,
         chartRangeMin: 0,
-        tooltipFormat: '<b>{{y}}</b>, {{offset:names}}'
+        tooltipFormat: '<p style="margin-right:10px">{{y}} , {{offset:names}}</p>'
       }
     };
     for (const chart in userGraphStat) {
