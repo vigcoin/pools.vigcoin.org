@@ -52,7 +52,7 @@ export class DataService {
 
     networkStat: {
       'vig': [
-        ['http://vig-pool.tyk.im', 'http://vig-pool.tyk.im:8119',
+        ['http://vig-pool.tyk.im', 'https://pool-status.vigcoin.org',
           {
             pool: {
               host: 'vig-pool.tyk.im',
