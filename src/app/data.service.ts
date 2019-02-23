@@ -52,11 +52,11 @@ export class DataService {
 
     networkStat: {
       'vig': [
-        ['http://pool.vigcoin.org ', 'http://pool.vigcoin.org:8119',
+        ['https://pools.vigcoin.org ', 'https://pool.vigcoin.org',
           {
             pool: {
               host: 'pool.vigcoin.org',
-              port: 8119
+              port: 443
             },
             url: 'https://pools.vigcoin.org',
             desc: '主矿池'
