@@ -52,6 +52,16 @@ export class DataService {
 
     networkStat: {
       'vig': [
+        ['http://pool.vigcoin.org ', 'http://pool.vigcoin.org:8119',
+          {
+            pool: {
+              host: 'pool.vigcoin.org',
+              port: 8119
+            },
+            url: 'https://pools.vigcoin.org',
+            desc: '主矿池'
+          }
+        ],
         ['http://vig-pool.tyk.im', 'https://pool-status.vigcoin.org',
           {
             pool: {
@@ -59,7 +69,7 @@ export class DataService {
               port: 8119
             },
             url: 'https://pools.vigcoin.org',
-            desc: '主矿池/旧矿池'
+            desc: '旧矿池'
           }
         ],
         ['http://pool-1.vigcoin.org', 'http://pool-1.vigcoin.org:8119', {
