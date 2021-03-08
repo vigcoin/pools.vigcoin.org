@@ -214,8 +214,10 @@ export class DataService {
     }
 
     if (diff < 12 * 30 * 24 * 3600) {
-      return (diff / 30 / 24 / 3600).toFixed(0) + ' 年前';
+      return (diff / 30 / 24 / 3600).toFixed(0) + ' 月前';
     }
+
+    return (diff / 12 / 30 / 24 / 3600).toFixed(0) + ' 年前';
   }
 
   formatAmounts(amount, unit) {
