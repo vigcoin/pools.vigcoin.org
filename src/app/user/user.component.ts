@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { DataService } from '../data.service';
-import { Observable } from 'rxjs/Observable';
-import { interval } from 'rxjs/observable/interval';
+import { Observable ,  interval } from 'rxjs';
 
 declare const $: any;
 

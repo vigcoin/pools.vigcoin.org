@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable ,  interval } from 'rxjs';
 import { DataService } from '../data.service';
-import { interval } from 'rxjs/observable/interval';
 
 @Component({
   selector: 'app-home',

@@ -3,8 +3,7 @@ import { Title, Meta } from '@angular/platform-browser';
 
 import { DataService } from './data.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { interval } from 'rxjs/observable/interval';
+import { Observable ,  interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
