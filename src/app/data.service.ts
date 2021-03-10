@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable ,  of } from 'rxjs';
-import * as _ from 'lodash';
+import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
 
 
 @Injectable()
@@ -256,7 +255,7 @@ export class DataService {
 
   getReadableCoins(status, coins, digits, withoutSymbol = null) {
 
-    const coinUnits = _.get(status, 'config.coinUnits');
+    const coinUnits = status.config?.coinUnits;
     const amount = (parseInt(coins || 0, 10)
       / coinUnits).toFixed(
         digits || coinUnits.toString().length - 1);
